@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Card from 'primevue/card'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import AppFooterContent from '@/components/layout/AppFooterContent.vue'
@@ -6,22 +7,34 @@ import AppFooterContent from '@/components/layout/AppFooterContent.vue'
 
 <template>
   <div
-    class="grid gap-4 grid-cols-[225px_minmax(100px,_1fr)] grid-flow-row auto-rows-max"
+    class="grid gap-1 grid-cols-[225px_minmax(100px,_1fr)] grid-flow-row auto-rows-max"
   >
     <header class="col-span-full">
       <AppHeader />
     </header>
 
     <aside class="min-h-screen">
-      <AppSidebar />
+      <Card class="min-h-screen">
+        <template #content>
+          <AppSidebar />
+        </template>
+      </Card>
     </aside>
 
     <main class="min-h-screen">
-      <RouterView />
+      <Card class="min-h-screen">
+        <template #content>
+          <RouterView />
+        </template>
+      </Card>
     </main>
 
-    <footer class="col-span-2 p-4">
-      <AppFooterContent />
+    <footer class="col-span-2">
+      <Card>
+        <template #content>
+          <AppFooterContent />
+        </template>
+      </Card>
     </footer>
   </div>
 </template>
