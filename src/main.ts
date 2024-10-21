@@ -13,6 +13,9 @@ const app = createApp(App)
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
+    options: {
+      darkModeSelector: '.dark', // non existing selector to turn darkmode off
+    },
   },
 })
 app.use(createPinia())
