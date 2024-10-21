@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main></main>
+  <h1>Hackaton app</h1>
 </template>
