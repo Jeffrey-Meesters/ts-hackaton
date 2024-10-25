@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import '@/assets/typography.css'
+import '@/assets/spacing.css'
+
 import Card from 'primevue/card'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'

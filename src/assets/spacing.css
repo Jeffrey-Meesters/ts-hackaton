@@ -1,0 +1,7 @@
+p {
+  @apply mb-1;
+}
+
+section {
+  @apply mb-4;
+}
