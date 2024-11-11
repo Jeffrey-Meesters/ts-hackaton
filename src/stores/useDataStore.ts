@@ -43,14 +43,14 @@ export const useDataStore = defineStore('dataStore', () => {
     return Object.keys(documentation.value).map(key => {
       const topic = documentation.value[key]
       return {
-        key: topic.name,
+        key: key,
         label: topic.name,
-        children: topic.topics.map(subTopic => ({
-          key: subTopic.name,
+        children: topic.subTopics.map(subTopic => ({
+          key: subTopic,
           label: subTopic.name,
-          children: subTopic.fields.map(field => ({
-            key: field.name,
-            label: field.name,
+          children: subTopic.examples.map(example => ({
+            key: example,
+            label: example.title,
           })),
         })),
       }
