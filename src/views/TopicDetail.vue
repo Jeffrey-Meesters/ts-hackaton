@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import CodeBlock from '@/components/detail/CodeBlock.vue'
 import { useDataStore } from '@/stores/useDataStore'
-const props = defineProps<{ topic: string }>()
 const dataStore = useDataStore()
-const data = dataStore.data
+const data = dataStore.activeData
 </script>
 
 <template>
@@ -19,8 +18,8 @@ const data = dataStore.data
       ipsum for some info about this topic
     </p>
 
-    <CodeBlock title="Jeffrey" code="const name = (name: string) => ({})" />
-
+    <CodeBlock title="Interface" code="const name = (name: string) => ({})" />
+    {{ data }}
     <p></p>
   </article>
 </template>
