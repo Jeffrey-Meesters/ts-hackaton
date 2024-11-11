@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { NodeService } from '@/service/NodeService';
+import { useDataStore } from '@/stores/useDataStore'
+
+const dataStore = useDataStore();
+const NodeService = dataStore.topicTree;
 
 interface TreeNode {
   key: string;
@@ -14,9 +17,7 @@ const expandedKeys = ref<Record<string, boolean>>({});
 const router = useRouter();
 
 onMounted(() => {
-  NodeService.getTreeNodesData().then((data: TreeNode[]) => {
-    nodes.value = data;
-  });
+  nodes.value = NodeService;
 });
 
 const expandAll = () => {
