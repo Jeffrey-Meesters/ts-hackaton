@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('../views/TopicView.vue'),
     },
     {
-      path: '/:topic/:detail',
+      path: '/:topic/:subTopic',
       name: 'detail',
       component: () => import('../views/TopicDetail.vue'),
     },

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+<<<<<<< Updated upstream
 import CodeBlock from '@/components/detail/CodeBlock.vue'
 const props = defineProps<{ topic: string }>()
 const topic = props.topic || 'Default Topic'
@@ -21,4 +22,21 @@ const topic = props.topic || 'Default Topic'
 
     <p></p>
   </article>
+=======
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const topic = route.params.topic;
+const subTopic = route.params.subTopic;
+
+const data = dataStore.data[topic].subTopics[subTopic] || null;
+</script>
+
+<template>
+  <div>
+    <h1>Topic details view</h1>
+
+    {{ data }}
+  </div>
+>>>>>>> Stashed changes
 </template>
