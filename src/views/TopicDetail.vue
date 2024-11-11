@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CodeBlock from '@/components/detail/CodeBlock.vue'
 const props = defineProps<{ topic: string }>()
 const topic = props.topic || 'Default Topic'
 </script>
@@ -7,7 +8,17 @@ const topic = props.topic || 'Default Topic'
   <div class="h-[30vh] flex justify-center items-center bg-[#007acc]">
     <h1 class="text-6xl text-white">{{ topic }}</h1>
   </div>
-  <main class="p-5">
-    <!-- Additional content goes here -->
-  </main>
+  <article>
+    <h1>Generics</h1>
+    <p>
+      Lorem ipsum for some info about this topic Lorem ipsum for some info about
+      this topic Lorem ipsum for some info about this topic Lorem ipsum for some
+      info about this topic Lorem ipsum for some info about this topic Lorem
+      ipsum for some info about this topic
+    </p>
+
+    <CodeBlock title="Jeffrey" code="const name = (name: string) => ({})" />
+
+    <p></p>
+  </article>
 </template>

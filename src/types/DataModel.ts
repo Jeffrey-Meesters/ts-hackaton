@@ -19,6 +19,7 @@ type Topic = {
   description: string
   level: Level
   topics: SubTopic[]
+  code: string
 }
 export type TypeScriptDocs = {
   utilityTypes: Topic
@@ -51,7 +52,7 @@ export type TypeScriptDocs = {
   abn: Topic
 }
 
-export type TopicKey = keyof TypeScriptDocs['Topics']
+export type TopicKey = keyof TypeScriptDocs
 export type TopicSummary = {
   name: string
   key: TopicKey
