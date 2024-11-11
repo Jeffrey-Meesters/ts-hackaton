@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import VCodeBlock from '@wdns/vue-code-block'
-const code = ref(`const foo = 'bar';`)
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <section class="md:max-w-4xl">
