@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import VCodeBlock from '@wdns/vue-code-block'
+const code = ref(`const foo = 'bar';`)
+</script>
 
 <template>
   <section class="md:max-w-4xl">
@@ -16,6 +20,14 @@
       today, and build the future.
     </p>
   </section>
+
+  <VCodeBlock
+    :code="code"
+    highlightjs
+    label="Hello World"
+    lang="javascript"
+    theme="neon-bunny"
+  />
 
   <section class="md:max-w-4xl">
     <h2>Benefits of TypeScript</h2>
