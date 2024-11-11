@@ -36,7 +36,7 @@ const partialUser: Partial<User> = { name: "Alice" }; // id is optional
 </script>
 
 <template>
-  <div class="h-[50vh] flex justify-center items-center bg-[#007acc]">
+  <div class="h-[10vh] flex justify-center items-center bg-[#007acc]">
     <h1 class="text-6xl text-white">{{ data.name }}</h1>
   </div>
   <article class="w-3/4 mx-auto pt-4">
