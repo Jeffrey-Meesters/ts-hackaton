@@ -19,6 +19,7 @@ type Topic = {
   description: string
   level: Level
   topics: SubTopic[]
+  code: string
 }
 export type TypeScriptDocs = {
   utilityTypes: Topic
