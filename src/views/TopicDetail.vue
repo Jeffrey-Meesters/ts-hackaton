@@ -17,7 +17,7 @@ const topic = props.topic || 'Default Topic'
       ipsum for some info about this topic
     </p>
 
-    <CodeBlock title="Jeffrey" code="const name = (name: string) => ({})" />
+    <CodeBlock title="Generics" code="const name = (name: string) => ({})" />
 
     <p></p>
   </article>
