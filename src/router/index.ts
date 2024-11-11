@@ -1,4 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized,
+} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -22,4 +27,14 @@ const router = createRouter({
   ],
 })
 
+export const beforeEachFn = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  // continue with routing
+  next()
+}
+
+router.beforeEachFn()
 export default router
