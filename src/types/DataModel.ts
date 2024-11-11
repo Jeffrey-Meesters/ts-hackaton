@@ -6,7 +6,7 @@ type Example = {
   code: string
 }
 
-type Topic = {
+type SubTopic = {
   name: string
   tags: string[]
   description: string
@@ -14,50 +14,47 @@ type Topic = {
   examples: Example[]
 }
 
-type Subject = {
+type Topic = {
   name: string
   description: string
   level: Level
-  topics: Topic[]
+  topics: SubTopic[]
 }
 export type TypeScriptDocs = {
-  version: string
-  subjects: {
-    utilityTypes: Subject
-    decorators: Subject
-    declarationMerging: Subject
-    enums: Subject
-    iteratorsAndGenerators: Subject
-    jsx: Subject
-    mixins: Subject
-    namespaces: Subject
-    namespacesAndModules: Subject
-    symbols: Subject
-    tripeSlashDirectives: Subject
-    typeCompatibility: Subject
-    typeInference: Subject
-    variableDeclaration: Subject
-    narrowing: Subject
-    functions: Subject
-    objectTypes: Subject
-    typesFromTypes: Subject
-    generics: Subject
-    keyofTypeOperator: Subject
-    typeofTypeOperator: Subject
-    indexedAccessTypes: Subject
-    conditionalTypes: Subject
-    mappedTypes: Subject
-    templateLiteralTypes: Subject
-    classes: Subject
-    modules: Subject
-    abn: Subject
-  }
+  utilityTypes: Topic
+  decorators: Topic
+  declarationMerging: Topic
+  enums: Topic
+  iteratorsAndGenerators: Topic
+  jsx: Topic
+  mixins: Topic
+  namespaces: Topic
+  namespacesAndModules: Topic
+  symbols: Topic
+  tripeSlashDirectives: Topic
+  typeCompatibility: Topic
+  typeInference: Topic
+  variableDeclaration: Topic
+  narrowing: Topic
+  functions: Topic
+  objectTypes: Topic
+  typesFromTypes: Topic
+  generics: Topic
+  keyofTypeOperator: Topic
+  typeofTypeOperator: Topic
+  indexedAccessTypes: Topic
+  conditionalTypes: Topic
+  mappedTypes: Topic
+  templateLiteralTypes: Topic
+  classes: Topic
+  modules: Topic
+  abn: Topic
 }
 
-export type SubjectKey = keyof TypeScriptDocs['subjects']
-export type SubjectSummary = {
+export type TopicKey = keyof TypeScriptDocs['Topics']
+export type TopicSummary = {
   name: string
-  key: SubjectKey
+  key: TopicKey
   description: string
   level: string
   tags: string[]
