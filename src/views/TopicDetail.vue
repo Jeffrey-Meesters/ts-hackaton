@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CodeBlock from '@/components/detail/CodeBlock.vue'
 // import { useDataStore } from '@/stores/useDataStore'
-
 // const dataStore = useDataStore()
 // const data = dataStore.activeData
 const data = {
@@ -34,21 +33,19 @@ const partialUser: Partial<User> = { name: "Alice" }; // id is optional
     },
   ],
 }
-console.log(data)
 </script>
 
 <template>
-  <div class="h-[30vh] flex justify-center items-center bg-[#007acc]">
-    <h1 class="text-6xl text-white">topic</h1>
+  <div class="h-[10vh] flex justify-center items-center bg-[#007acc]">
+    <h1 class="text-6xl text-white">{{ data.name }}</h1>
   </div>
-  <article>
-    <h1>{{ data.name }}</h1>
+  <article class="w-3/4 mx-auto pt-4">
     <p>
       {{ data.description }}
     </p>
 
-    <div v-for="subTopic in data.subTopics" :key="subTopic.name">
-      <h2>{{ subTopic.name }}</h2>
+    <div class="pt-4" v-for="subTopic in data.subTopics" :key="subTopic.name">
+      <h2 class="mb-0">{{ subTopic.name }}</h2>
       <p>{{ subTopic.description }}</p>
 
       <div v-for="example in subTopic.examples" :key="example.title">
