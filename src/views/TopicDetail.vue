@@ -8,7 +8,7 @@ const data = dataStore.data
 
 <template>
   <div class="h-[30vh] flex justify-center items-center bg-[#007acc]">
-    <h1 class="text-6xl text-white">{{ topic }}</h1>
+    <h1 class="text-6xl text-white">topic</h1>
   </div>
   <article>
     <h1>Generics</h1>
@@ -19,8 +19,7 @@ const data = dataStore.data
       ipsum for some info about this topic
     </p>
 
-    <CodeBlock title="Generics" code="const name = (name: string) => ({})" />
-    {{ data }}
+    <CodeBlock title="Jeffrey" code="const name = (name: string) => ({})" />
 
     <p></p>
   </article>
