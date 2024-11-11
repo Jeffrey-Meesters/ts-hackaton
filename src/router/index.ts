@@ -8,16 +8,38 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        layout: 'plain',
+      },
     },
     {
       path: '/:topic',
       name: 'topic',
       component: () => import('../views/TopicView.vue'),
+      meta: {
+        layout: 'page',
+      },
     },
     {
       path: '/:topic/:subTopic',
       name: 'detail',
       component: () => import('../views/TopicDetail.vue'),
+      meta: {
+        layout: 'page',
+      },
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: () => import('../views/Error.vue'),
+      meta: {
+        layout: 'plain',
+      },
+    },
+    // fallback route
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
     },
   ],
 })
