@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   createRouter,
   createWebHistory,
@@ -5,14 +6,18 @@ import {
   type RouteLocationNormalized,
 } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+=======
+import { createRouter, createWebHistory } from 'vue-router'
+import TopicPage from '../views/TopicPage.vue'
+>>>>>>> 9b6f57f8adb25d69d3e008becb94fa327ece34c0
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      name: 'topic',
+      component: TopicPage,
     },
     {
       path: '/:topic',
@@ -20,7 +25,7 @@ const router = createRouter({
       component: () => import('../views/TopicView.vue'),
     },
     {
-      path: '/:topic/:detail',
+      path: '/:topic/:subTopic',
       name: 'detail',
       component: () => import('../views/TopicDetail.vue'),
     },

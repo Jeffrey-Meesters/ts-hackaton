@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import CodeBlock from '@/components/detail/CodeBlock.vue'
+import { useDataStore } from '@/stores/useDataStore'
 const props = defineProps<{ topic: string }>()
-const topic = props.topic || 'Default Topic'
+const dataStore = useDataStore()
+const data = dataStore.data
 </script>
 
 <template>
   <div class="h-[30vh] flex justify-center items-center bg-[#007acc]">
-    <h1 class="text-6xl text-white">{{ topic }}</h1>
+    <h1 class="text-6xl text-white">topic</h1>
   </div>
   <article>
     <h1>Generics</h1>

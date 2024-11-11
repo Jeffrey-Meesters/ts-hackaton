@@ -6,7 +6,7 @@ type Example = {
   code: string
 }
 
-type SubTopic = {
+export type SubTopic = {
   name: string
   tags: string[]
   description: string
@@ -14,11 +14,11 @@ type SubTopic = {
   examples: Example[]
 }
 
-type Topic = {
+export type Topic = {
   name: string
   description: string
   level: Level
-  topics: SubTopic[]
+  subTopics: SubTopic[]
   code: string
 }
 export type TypeScriptDocs = {
@@ -53,11 +53,3 @@ export type TypeScriptDocs = {
 }
 
 export type TopicKey = keyof TypeScriptDocs
-export type TopicSummary = {
-  name: string
-  key: TopicKey
-  description: string
-  level: string
-  tags: string[]
-  topics: string[]
-}
