@@ -6,6 +6,12 @@ type Example = {
   code: string
 }
 
+export type TopicTree = {
+  key: string
+  label: string
+  children?: TopicTree[]
+}
+
 export type SubTopic = {
   name: string
   tags: string[]
