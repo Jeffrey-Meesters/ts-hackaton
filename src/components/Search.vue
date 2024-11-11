@@ -1,0 +1,103 @@
+<template>
+    <div 
+      class='inline-block bg-slate-200 w-full'
+      ref="searchContainer"
+    >
+      <form class="mx-auto">   
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+          </div>
+          <input 
+            v-model="query" 
+            @input="onInput" 
+            @focus="showResults = true" 
+            type="search" 
+            id="default-search" 
+            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+            placeholder="Search Mockups, Logos..." 
+            required 
+          />
+          <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+        </div>
+      </form>
+      <div v-if="showResults">
+        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
+        <ul>
+          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
+        </ul>
+        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
+        <ul>
+          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
+        </ul>
+        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
+        <ul>
+          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
+          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
+        </ul>
+      </div>
+    </div>
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, onMounted, onBeforeUnmount } from 'vue';
+  import { docs } from '../data/docs';
+  import type { Topic, TypeScriptDocs, TopicKey } from '@/types/DataModel'
+
+  type listType = string[];
+
+  const query = ref<string>('');
+  const searchList = ref<listType>([]);
+  const showResults = ref<boolean>(false);
+  const searchContainer = ref<HTMLElement | null>(null);
+  const topics = ref<Topic[]>([]);
+  
+  const fetchSearchResults = () => {
+    // console.log(docs);
+    // topics.value = Object.keys(docs).map((key: string) => {
+    //     const doc = docs[key as TopicKey]
+    //     if(doc){
+
+    //     }
+    //     // .name.includes(query.value)) return docs[topic] 
+    //     // return [null];
+    // }
+    // )
+  }
+
+
+const onInput = () => {
+    showResults.value = query.value.length > 0;
+    fetchSearchResults();
+}
+  
+  const handleClickOutside = (event: MouseEvent) => {
+    if (searchContainer.value && !searchContainer.value.contains(event.target as Node)) {
+      showResults.value = false;
+    }
+  };
+  
+  onMounted(() => {
+    document.addEventListener('click', handleClickOutside);
+  });
+  
+  onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside);
+  });
+  
+  </script>
+  
+  <style scoped>
+  /* Add your styles here if needed */
+  </style>
