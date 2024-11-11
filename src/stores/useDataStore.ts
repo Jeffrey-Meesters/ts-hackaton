@@ -29,7 +29,7 @@ export const useDataStore = defineStore('dataStore', () => {
   const selectedTopic: Ref<Topic | null> = ref(null)
   const selectedSubtopic: Ref<SubTopic | null> = ref(null)
 
-  const activeData = computed(() => {
+  const activeData = computed((): Topic | SubTopic => {
     if (selectedSubtopic.value) {
       return selectedSubtopic.value
     }
@@ -39,7 +39,23 @@ export const useDataStore = defineStore('dataStore', () => {
     return null
   })
 
-  // const topicTree = com
+  const topicTree = computed((): TopicTree[] => {
+    return Object.keys(documentation.value).map(key => {
+      const topic = documentation.value[key]
+      return {
+        key: topic.name,
+        label: topic.name,
+        children: topic.topics.map(subTopic => ({
+          key: subTopic.name,
+          label: subTopic.name,
+          children: subTopic.fields.map(field => ({
+            key: field.name,
+            label: field.name,
+          })),
+        })),
+      }
+    })
+  })
 
   return {
     documentation,
@@ -47,7 +63,7 @@ export const useDataStore = defineStore('dataStore', () => {
     selectedTopic,
     selectedSubtopic,
     activeData,
-    // topicTree,
+    topicTree,
   }
 })
 
