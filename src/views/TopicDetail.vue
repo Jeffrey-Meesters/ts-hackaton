@@ -1,7 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CodeBlock from '@/components/detail/CodeBlock.vue';
+</script>
 
 <template>
-  <div>
-    <h1>Topic detail view</h1>
+  <div class="h-[30vh] flex justify-center items-center bg-[#007acc]">
+    <h1 class="text-6xl text-white">topic</h1>
   </div>
+  <article>
+    <h1>Generics</h1>
+    <p>
+      Lorem ipsum for some info about this topic Lorem ipsum for some info about this topic Lorem ipsum for some info about this topic Lorem ipsum for some info
+      about this topic Lorem ipsum for some info about this topic Lorem ipsum for some info about this topic
+    </p>
+
+    <CodeBlock title="Jeffrey" code="const name = (name: string) => ({})" />
+
+    <p></p>
+  </article>
 </template>

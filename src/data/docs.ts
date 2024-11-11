@@ -5,118 +5,137 @@ export const docs: TypeScriptDocs = {
     name: 'Declaration Merging',
     description: 'Combining multiple declarations into a single definition.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   jsx: {
     name: 'JSX',
     description:
       "TypeScript's support for JSX, a syntax extension for JavaScript.",
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   namespaces: {
     name: 'Namespaces',
     description: 'Organize and manage code within a TypeScript application.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   namespacesAndModules: {
     name: 'Namespaces and Modules',
     description:
       'Understand the differences and use cases of namespaces and modules.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   symbols: {
     name: 'Symbols',
     description: 'A primitive data type for unique identifiers.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   tripeSlashDirectives: {
     name: 'Triple-Slash Directives',
     description: 'Special comments for compiler directives.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   typeCompatibility: {
     name: 'Type Compatibility',
     description: 'Determines if one type is assignable to another.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   variableDeclaration: {
     name: 'Variable Declaration',
     description: 'Syntax and rules for declaring variables in TypeScript.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   narrowing: {
     name: 'Type Narrowing',
     description: 'Refine types through control flow analysis.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   objectTypes: {
     name: 'Object Types',
     description: 'Defining and working with complex object structures.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   typesFromTypes: {
     name: 'Types from Types',
     description: 'Derive new types from existing types.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   keyofTypeOperator: {
     name: 'Keyof Type Operator',
     description: 'Retrieve keys of a given type as a union.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   typeofTypeOperator: {
     name: 'Typeof Type Operator',
     description: 'Obtain the type of a value at runtime.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   indexedAccessTypes: {
     name: 'Indexed Access Types',
     description: 'Access the type of a property by key.',
     level: 'advanced',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   conditionalTypes: {
     name: 'Conditional Types',
     description:
       'Types that choose one of two possible types based on a condition.',
     level: 'expert',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   templateLiteralTypes: {
     name: 'Template Literal Types',
     description: 'Build types using template literal syntax.',
     level: 'expert',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   classes: {
     name: 'Classes',
     description: 'Define blueprints for creating objects.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   modules: {
     name: 'Modules',
     description: 'Reusable pieces of code in TypeScript.',
     level: 'basic',
-    topics: [],
+    code: '',
+    subTopics: [],
   },
   utilityTypes: {
     name: 'Utility Types',
     description: 'Predefined types to facilitate common type transformations.',
     level: 'advanced',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Partial<T>',
         tags: ['utility', 'generic'],
@@ -146,7 +165,8 @@ const partialUser: Partial<User> = { name: "Alice" }; // id is optional
     description:
       'Special kind of declaration used to modify classes and their members.',
     level: 'expert',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Class Decorators',
         tags: ['decorators', 'classes'],
@@ -173,7 +193,8 @@ class MyClass {}
     name: 'Enums',
     description: 'Defines a set of named constants.',
     level: 'basic',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Numeric Enums',
         tags: ['enums', 'numeric'],
@@ -204,7 +225,8 @@ let dir: Direction = Direction.Up;
     name: 'Iterators and Generators',
     description: 'Provides patterns for iteration in TypeScript.',
     level: 'advanced',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Generators',
         tags: ['iterators', 'generators'],
@@ -235,7 +257,8 @@ for (let value of generatorFunction()) {
     name: 'Mixins',
     description: 'Combine multiple classes into one.',
     level: 'expert',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Basic Mixins',
         tags: ['mixins', 'classes'],
@@ -276,7 +299,8 @@ person.swim();
     name: 'Abn Amro specific',
     description: 'Abn Amro specific documentation for TypeScript',
     level: 'advanced',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: "Add d.ts to Abn amro api's that have no types",
         description:
@@ -292,7 +316,8 @@ person.swim();
     description:
       'Generic types enable you to write flexible, reusable functions and classes that work with multiple types while maintaining type safety.',
     level: 'advanced',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Generic Functions',
         description:
@@ -354,7 +379,8 @@ person.swim();
     description:
       'A type created by transforming the properties of an existing type.',
     level: 'expert',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Basic Mapping',
         tags: ['types', 'mapped types', 'transformation'],
@@ -385,7 +411,8 @@ person.swim();
     description:
       'TypeScript functions with type annotations for parameters and return values.',
     level: 'basic',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Function Types',
         tags: ['functions', 'types', 'annotations', 'parameters', 'optional'],
@@ -441,7 +468,8 @@ person.swim();
     description:
       "TypeScript's ability to automatically determine types based on context.",
     level: 'basic',
-    topics: [
+    code: '',
+    subTopics: [
       {
         name: 'Basic Inference',
         tags: ['type inference', 'basics', 'variables'],
