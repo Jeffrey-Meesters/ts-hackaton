@@ -6,7 +6,7 @@ type Example = {
   code: string
 }
 
-type SubTopic = {
+export type SubTopic = {
   name: string
   tags: string[]
   description: string
@@ -14,7 +14,7 @@ type SubTopic = {
   examples: Example[]
 }
 
-type Topic = {
+export type Topic = {
   name: string
   description: string
   level: Level
