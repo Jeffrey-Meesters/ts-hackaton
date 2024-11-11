@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router';
 
-const route = useRoute()
-const topic = route.params.topic
+const route = useRoute();
+const topic = route.params.topic;
 
-const data = dataStore.data[topic] || null
+const data = dataStore.data[topic] || null;
 </script>
 
 <template>
