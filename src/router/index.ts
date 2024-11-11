@@ -32,7 +32,7 @@ export const beforeEachFn = async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
-  // continue with routing
+  console.log('to', to)
   next()
 }
 

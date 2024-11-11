@@ -3,11 +3,11 @@ export const NodeService = {
         return Promise.resolve([
             {
                 key: '0',
-                label: 'Root',
+                label: 'Utilities',
                 children: [
                     {
                         key: '0-0',
-                        label: 'Child 1',
+                        label: 'Record',
                         children: [
                             {
                                 key: '0-0-0',
@@ -21,7 +21,7 @@ export const NodeService = {
                     },
                     {
                         key: '0-1',
-                        label: 'Child 2',
+                        label: 'Partial',
                         children: [
                             {
                                 key: '0-1-0',
@@ -33,11 +33,11 @@ export const NodeService = {
             },
             {
                 key: '1',
-                label: 'Root 2',
+                label: 'Functions',
                 children: [
                     {
                         key: '1-0',
-                        label: 'Child 1',
+                        label: 'Async Functions',
                     },
                     {
                         key: '1-1',
