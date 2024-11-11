@@ -1,8 +1,14 @@
 <script setup lang="ts">
-<<<<<<< Updated upstream
+import { useRoute } from 'vue-router'
 import CodeBlock from '@/components/detail/CodeBlock.vue'
+import dataStore from '@/store/dataStore'
+const route = useRoute()
+
 const props = defineProps<{ topic: string }>()
 const topic = props.topic || 'Default Topic'
+const subTopic = route.params.subTopic
+
+const data = dataStore.data[topic].subTopics[subTopic] || null
 </script>
 
 <template>
@@ -19,24 +25,8 @@ const topic = props.topic || 'Default Topic'
     </p>
 
     <CodeBlock title="Generics" code="const name = (name: string) => ({})" />
+    {{ data }}
 
     <p></p>
   </article>
-=======
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-const topic = route.params.topic;
-const subTopic = route.params.subTopic;
-
-const data = dataStore.data[topic].subTopics[subTopic] || null;
-</script>
-
-<template>
-  <div>
-    <h1>Topic details view</h1>
-
-    {{ data }}
-  </div>
->>>>>>> Stashed changes
 </template>
