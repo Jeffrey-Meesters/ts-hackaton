@@ -6,15 +6,13 @@ interface CardProps {
   name: string,
   code: string,
   description: string,
+  parentName: string,
 };
 
 defineProps<CardProps>();
 
 const router = useRouter();
 
-const onNodeClick = (label: string) => {
-  router.push({ name: 'topic', params: { topic: label } });
-};
 </script>
 <template>
   <div>
@@ -30,7 +28,7 @@ const onNodeClick = (label: string) => {
         </template>
         <template #footer>
           <div class="flex gap-4 mt-1">
-            <Button label="See Detail" class="w-full" @click="onNodeClick(name)" />
+            <Button label="See Detail" class="w-full" @click="router.push({ path: `/${parentName}/${name}` })" />
           </div>
         </template>
       </Card>
