@@ -41,7 +41,7 @@ const router = createRouter({
       name: 'topic',
       component: () => import('../views/TopicView.vue'),
       meta: {
-        layout: 'page',
+        layout: 'content',
       },
     },
     {
@@ -49,7 +49,7 @@ const router = createRouter({
       name: 'detail',
       component: () => import('../views/TopicDetail.vue'),
       meta: {
-        layout: 'page',
+        layout: 'content',
       },
     },
     {
