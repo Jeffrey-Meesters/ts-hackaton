@@ -1,5 +1,11 @@
 type Level = 'basic' | 'advanced' | 'expert'
 
+export type CardItem = {
+  name: string
+  code: string
+  description: string
+}
+
 export type Example = {
   title?: string
   description?: string
@@ -59,3 +65,6 @@ export type TypeScriptDocs = {
 }
 
 export type TopicKey = keyof TypeScriptDocs
+export type PartialTypeScriptDocs = Partial<TypeScriptDocs>;
+
+ 
