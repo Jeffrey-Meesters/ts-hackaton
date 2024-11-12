@@ -5,6 +5,7 @@ import { shallowRef } from 'vue';
 import PageLayout from '@/layouts/Page.vue';
 import PlainLayout from '@/layouts/Plain.vue';
 import { useRoute, useRouter, RouterView } from 'vue-router';
+import MainFooter from '@/components/footer/MainFooter.vue';
 
 const layouts = {
   plain: PlainLayout,
@@ -24,9 +25,10 @@ router.afterEach(setLayout);
 </script>
 
 <template>
-  <div class="bg-slate-200 min-h-screen">
-    <component :key="currentLayout" v-bind:is="currentLayout">
+  <div class="bg-slate-200 min-h-screen flex flex-col">
+    <component :key="currentLayout" v-bind:is="currentLayout" class="flex-1">
       <RouterView />
     </component>
+    <MainFooter />
   </div>
 </template>

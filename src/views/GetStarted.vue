@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="md:max-w-4xl mx-auto mt-10">
     <h1>Get Started</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dignissimos, aliquam minima nisi provident expedita delectus facere, maiores, assumenda
