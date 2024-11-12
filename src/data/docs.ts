@@ -59,8 +59,52 @@ export const docs: TypeScriptDocs = {
     description:
       "TypeScript's support for JSX, a syntax extension for JavaScript.",
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: '<div>Hello, world!</div>',
+    subTopics: [
+      {
+        name: 'Basic JSX Usage',
+        tags: ['jsx', 'typescript', 'react'],
+        description:
+          'Introduction to using JSX syntax in TypeScript with React.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Simple JSX Element',
+            description: 'Creating a basic JSX element in a TypeScript file.',
+            code: 'const element = <h1>Hello, world!</h1>;',
+          },
+        ],
+      },
+      {
+        name: 'Type Checking in JSX',
+        tags: ['jsx', 'typescript', 'type-checking'],
+        description:
+          'Explains how TypeScript performs type checking on JSX elements.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'JSX with Props Type Checking',
+            description:
+              'TypeScript checks the types of props passed to JSX components.',
+            code: 'interface GreetingProps { name: string; }\nconst Greeting: React.FC<GreetingProps> = ({ name }) => <h1>Hello, {name}!</h1>;\n<Greeting name="Alice" />;',
+          },
+        ],
+      },
+      {
+        name: 'JSX in TypeScript Projects',
+        tags: ['jsx', 'typescript', 'project-setup'],
+        description: 'Setting up a TypeScript project to support JSX.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Configuring tsconfig.json for JSX',
+            description:
+              'Modify the TypeScript configuration to support JSX syntax.',
+            code: '{\n  "compilerOptions": {\n    "jsx": "react",\n    "allowJs": true,\n    "checkJs": false\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   namespaces: {
     name: 'Namespaces',
