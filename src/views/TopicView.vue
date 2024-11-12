@@ -25,7 +25,7 @@ const data = computed(() => activeData.value as Topic)
             <p>{{ data.description }}</p>
             <Accordion value="0">
               <AccordionPanel
-                v-for="tab in data.subTopics"
+                v-for="(tab, index) in data.subTopics"
                 :key="tab.name"
                 :value="tab.name"
               >
@@ -33,15 +33,17 @@ const data = computed(() => activeData.value as Topic)
                 <AccordionContent>
                   <p class="m-0">{{ tab.description }}</p>
                   <div class="text-right">
-                    <Button
-                      icon="pi pi-link"
-                      size="small"
-                      class="mt-2"
-                      label="Read Article"
-                      variant="text"
-                      severity="secondary"
-                      raised
-                    />
+                    <router-link :to="{ path: '/enums/' + index }">
+                      <Button
+                        icon="pi pi-link"
+                        size="small"
+                        class="mt-2"
+                        label="Read Article"
+                        variant="text"
+                        severity="secondary"
+                        raised
+                      />
+                    </router-link>
                   </div>
                 </AccordionContent>
               </AccordionPanel>
