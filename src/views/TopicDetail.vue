@@ -17,8 +17,13 @@ const data = computed(() => activeData.value as SubTopic)
     <template #content>
       <article class="w-3/4 mx-auto">
         <div class="mb-2">
-          <Button class="mr-2" label="First example" severity="secondary" />
-          <Button label="Second example" severity="secondary" />
+          <Button
+            v-for="tag in data.tags"
+            :key="tag"
+            class="mr-2"
+            :label="tag"
+            severity="secondary"
+          />
         </div>
         <Card>
           <template #title>
