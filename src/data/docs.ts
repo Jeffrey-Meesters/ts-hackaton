@@ -110,8 +110,48 @@ export const docs: TypeScriptDocs = {
     name: 'Namespaces',
     description: 'Organize and manage code within a TypeScript application.',
     level: 'basic',
-    code: '',
-    subTopics: [],
+    code: 'namespace MyNamespace {\n  export const greet = () => "Hello, world!";\n}\nconsole.log(MyNamespace.greet());',
+    subTopics: [
+      {
+        name: 'Creating Namespaces',
+        tags: ['namespaces', 'typescript'],
+        description: 'Learn how to define and use namespaces in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Namespace Declaration',
+            description: 'Create a simple namespace to encapsulate code.',
+            code: 'namespace Utilities {\n  export function log(message: string) {\n    console.log(message);\n  }\n}\nUtilities.log("Logging a message");',
+          },
+        ],
+      },
+      {
+        name: 'Nested Namespaces',
+        tags: ['namespaces', 'typescript', 'nested'],
+        description: 'Explore how to nest namespaces within each other.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Nested Namespaces',
+            description: 'Define a namespace within another namespace.',
+            code: 'namespace Outer {\n  export namespace Inner {\n    export const name = "InnerNamespace";\n  }\n}\nconsole.log(Outer.Inner.name);',
+          },
+        ],
+      },
+      {
+        name: 'Merging Namespaces',
+        tags: ['namespaces', 'typescript', 'merging'],
+        description: 'Understand how to merge multiple namespace declarations.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Namespace Merging Example',
+            description: 'Merge two namespace declarations into one.',
+            code: 'namespace Shapes {\n  export function square(x: number) { return x * x; }\n}\nnamespace Shapes {\n  export function circle(r: number) { return Math.PI * r * r; }\n}\nconsole.log(Shapes.square(2), Shapes.circle(3));',
+          },
+        ],
+      },
+    ],
   },
   namespacesAndModules: {
     name: 'Namespaces and Modules',
@@ -119,14 +159,118 @@ export const docs: TypeScriptDocs = {
       'Understand the differences and use cases of namespaces and modules.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Namespaces vs. Modules',
+        tags: ['namespaces', 'modules', 'typescript'],
+        description:
+          'Learn the key differences between namespaces and modules in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Comparison',
+            description:
+              'A simple example illustrating the difference between namespaces and modules.',
+            code: '// Namespace example\nnamespace Utilities {\n  export function log(message: string) {\n    console.log(message);\n  }\n}\nUtilities.log("Namespace logging");\n\n// Module example\n// utilities.ts\nexport function log(message: string) {\n  console.log(message);\n}\n// usage in another file\n// import { log } from "./utilities";\n// log("Module logging");',
+          },
+        ],
+      },
+      {
+        name: 'When to Use Namespaces',
+        tags: ['namespaces', 'typescript'],
+        description: 'Understand scenarios where namespaces are beneficial.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Namespaces for Internal Modules',
+            description:
+              'Namespaces are ideal for organizing code in internal libraries.',
+            code: 'namespace InternalLibrary {\n  export function internalFunction() {\n    console.log("Internal function");\n  }\n}\nInternalLibrary.internalFunction();',
+          },
+        ],
+      },
+      {
+        name: 'When to Use Modules',
+        tags: ['modules', 'typescript'],
+        description: 'Learn when modules are preferred over namespaces.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Modules for External Libraries',
+            description:
+              'Modules are used for creating and consuming external libraries.',
+            code: '// math.ts\nexport function add(x: number, y: number): number {\n  return x + y;\n}\n// usage in another file\n// import { add } from "./math";\n// console.log(add(2, 3));',
+          },
+        ],
+      },
+    ],
   },
   symbols: {
     name: 'Symbols',
     description: 'A primitive data type for unique identifiers.',
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: 'const uniqueSymbol = Symbol("unique");',
+    subTopics: [
+      {
+        name: 'Creating Symbols',
+        tags: ['symbols', 'unique identifiers', 'typescript'],
+        description:
+          'Learn how to create and use symbols as unique identifiers.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Symbol Creation',
+            description: 'Create a new symbol using the Symbol function.',
+            code: 'const mySymbol = Symbol("description");\nconsole.log(typeof mySymbol); // "symbol"',
+          },
+        ],
+      },
+      {
+        name: 'Symbols as Object Keys',
+        tags: ['symbols', 'object keys', 'typescript'],
+        description:
+          'Use symbols as keys in objects for unique property identifiers.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Symbols for Object Properties',
+            description:
+              'Demonstrates how symbols can be used as object property keys.',
+            code: 'const symKey = Symbol("key");\nconst obj = { [symKey]: "value" };\nconsole.log(obj[symKey]); // "value"',
+          },
+        ],
+      },
+      {
+        name: 'Global Symbols',
+        tags: ['symbols', 'global registry', 'typescript'],
+        description:
+          'Understand how to use the global symbol registry for shared symbols.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Shared Symbols with Symbol.for',
+            description:
+              'Use Symbol.for to create or retrieve symbols from the global registry.',
+            code: 'const globalSym = Symbol.for("shared");\nconst sameGlobalSym = Symbol.for("shared");\nconsole.log(globalSym === sameGlobalSym); // true',
+          },
+        ],
+      },
+      {
+        name: 'Well-Known Symbols',
+        tags: ['symbols', 'well-known symbols', 'typescript'],
+        description:
+          'Explore well-known symbols that are built into JavaScript.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Using Well-Known Symbols',
+            description:
+              'Example of using Symbol.iterator to make an object iterable.',
+            code: 'const iterableObj = {\n  [Symbol.iterator]: function* () {\n    yield 1;\n    yield 2;\n    yield 3;\n  }\n};\nfor (const value of iterableObj) {\n  console.log(value); // 1, 2, 3\n}',
+          },
+        ],
+      },
+    ],
   },
   tripeSlashDirectives: {
     name: 'Triple-Slash Directives',
