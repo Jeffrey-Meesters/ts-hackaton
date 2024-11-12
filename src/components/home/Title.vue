@@ -8,7 +8,7 @@
       </span>
     </div>
     <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-7xl">Your personal TypeScript cheat-sheet</h1>
-    <div class="mt-6 text-lg tracking-tight text-gray-600">
+    <div class="mt-6 text-lg tracking-tight text-gray-600 text-balance">
       Learn TypeScript with our interactive cheat-sheet. Get started with TypeScript and learn the basics in minutes.
     </div>
     <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 justify-center">
