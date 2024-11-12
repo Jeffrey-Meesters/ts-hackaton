@@ -11,7 +11,7 @@ const data = computed(() => activeData.value as Topic)
 </script>
 
 <template>
-  <pageLayout :name="activeData.name">
+  <pageLayout :name="data.name">
     <template #content>
       <article class="w-3/4 mx-auto">
         <div class="mb-2">
