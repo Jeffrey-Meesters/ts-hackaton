@@ -33,6 +33,12 @@
           <router-link :to="key">{{ topic?.name }}</router-link>
         </li>
       </ul>
+      <!-- <span v-if="subTopics?.length" class="bg-slate-700 text-white block py-2 pl-2">Subtopics</span>
+      <ul v-if="subTopics">
+        <li :key="key" v-for="(topic, key) of subTopics" class="py-1 pl-2" @click="showResults = false">
+          <router-link :to="topic">{{ topic?.name }}</router-link>
+        </li>
+      </ul> -->
     </div>
   </div>
 </template>
@@ -40,7 +46,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { docs } from '../data/docs';
-import type { PartialTypeScriptDocs, SubTopic } from '@/types/DataModel';
+
+import type { PartialTypeScriptDocs, SubTopic, SearchItem, Topic } from '@/types/DataModel';
 
 type listType = string[];
 const query = ref<string>('');
@@ -48,27 +55,30 @@ const searchList = ref<listType>([]);
 const showResults = ref<boolean>(false);
 const searchContainer = ref<HTMLElement | null>(null);
 const topics = ref<PartialTypeScriptDocs | null>(null);
-const subTopics = ref<SubTopic[] | null>(null);
+type SearchTopic = SubTopic & {index: number, topicKey: string}[]
+const subTopics = ref<SearchTopic>();
 
 const fetchSearchResults = () => {
   const result = Object.entries(docs).filter(([key, value]) => {
-    if (value.subTopics.length) {
-      const subtopicList = value.subTopics.filter((item) => {
-        if (item.name.toLowerCase().includes(query.value.toLowerCase())) {
-          return item as SubTopic;
-        }
-      });
-      subTopics.value = subtopicList;
-    }
+    // if (value.subTopics.length) {
+    //   const subtopicList = value.subTopics.filter((item, index) => {
+    //     if (item.name.toLowerCase().includes(query.value.toLowerCase())) {
+    //       subTopics.value?.push({...item, index, topicKey: key});
+    //       return item as SubTopic;
+    //     }
+    //   });
+    //   console.log(subTopics.value);
+      
+    // }
     if (value.name.toLowerCase().includes(query.value.toLowerCase())) {
       return [key, value];
     }
   });
   topics.value = Object.fromEntries(result) as PartialTypeScriptDocs;
-  console.log(subTopics.value);
 };
 
 const onInput = () => {
+  subTopics.value = [] as any as SearchTopic;
   showResults.value = query.value.length > 0;
   fetchSearchResults();
 };
