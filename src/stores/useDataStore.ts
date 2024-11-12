@@ -20,8 +20,8 @@ export const useDataStore = defineStore('dataStore', () => {
   const selectedSubtopic = ref<number | undefined>()
 
   const activeData = computed((): Topic | SubTopic | null => {
-    console.log('IKD RAAI')
-    if (selectedTopic.value && selectedSubtopic.value) {
+    console.log(selectedTopic.value, selectedSubtopic.value)
+    if (selectedTopic.value && typeof selectedSubtopic.value === 'number') {
       return documentation.value[selectedTopic.value].subTopics[
         selectedSubtopic.value
       ]
