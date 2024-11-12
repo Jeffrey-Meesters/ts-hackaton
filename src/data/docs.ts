@@ -276,22 +276,182 @@ export const docs: TypeScriptDocs = {
     name: 'Triple-Slash Directives',
     description: 'Special comments for compiler directives.',
     level: 'basic',
-    code: '',
-    subTopics: [],
+    code: '/// <reference path="..." />',
+    subTopics: [
+      {
+        name: 'Reference Directives',
+        tags: ['triple-slash', 'typescript', 'reference'],
+        description:
+          'Learn how to use triple-slash reference directives to include files.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Reference Directive',
+            description:
+              'Use a triple-slash directive to include a reference to another file.',
+            code: '/// <reference path="helper.ts" />\nconsole.log("This file references helper.ts");',
+          },
+        ],
+      },
+      {
+        name: 'Types Reference Directive',
+        tags: ['triple-slash', 'typescript', 'types'],
+        description:
+          'Use types reference directive to include declaration files.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Including Type Declarations',
+            description:
+              'Include type declarations from DefinitelyTyped packages.',
+            code: '/// <reference types="node" />\nimport * as fs from "fs";\nconsole.log("Node.js types included");',
+          },
+        ],
+      },
+      {
+        name: 'No-Default-Lib Directive',
+        tags: ['triple-slash', 'typescript', 'no-default-lib'],
+        description: 'Exclude the default library files from the compilation.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Excluding Default Libraries',
+            description:
+              'Use the no-default-lib directive to exclude default libraries.',
+            code: '/// <reference no-default-lib="true"/>\nconsole.log("Default libraries excluded");',
+          },
+        ],
+      },
+    ],
   },
   typeCompatibility: {
     name: 'Type Compatibility',
     description: 'Determines if one type is assignable to another.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Structural Typing',
+        tags: ['type compatibility', 'typescript', 'structural typing'],
+        description:
+          'Understand how TypeScript uses structural typing to determine compatibility.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Structural Typing',
+            description:
+              'Illustrates how objects with the same shape are compatible.',
+            code: 'interface Point { x: number; y: number; }\nlet p: Point = { x: 10, y: 20 };\nlet q = { x: 10, y: 20, z: 30 };\np = q; // OK, because q has at least x and y',
+          },
+        ],
+      },
+      {
+        name: 'Function Compatibility',
+        tags: ['type compatibility', 'typescript', 'functions'],
+        description:
+          'How functions are compared based on their parameter and return types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Function Parameter Compatibility',
+            description:
+              'Examples of how function parameters affect compatibility.',
+            code: 'let func1 = (a: number) => a;\nlet func2 = (b: number, c: string) => b;\nfunc1 = func2; // Error: func2 has more parameters\nfunc2 = func1; // OK: func1 can be called with fewer parameters',
+          },
+        ],
+      },
+      {
+        name: 'Enum Compatibility',
+        tags: ['type compatibility', 'typescript', 'enums'],
+        description:
+          'Understand how enum types are compatible with numeric values.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Enum and Number Compatibility',
+            description: 'Shows compatibility between enums and numbers.',
+            code: 'enum Status { Ready, Waiting };\nlet num: number = Status.Ready;\nlet status: Status = 1; // OK, because enums are compatible with numbers',
+          },
+        ],
+      },
+      {
+        name: 'Class Compatibility',
+        tags: ['type compatibility', 'typescript', 'classes'],
+        description:
+          'Explains how classes are compatible based on their structure.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class Structural Compatibility',
+            description:
+              'Two classes are compatible if they have the same members.',
+            code: 'class Animal {\n  feet: number;\n  constructor(name: string, numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nclass Size {\n  feet: number;\n  constructor(numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nlet a: Animal = new Size(4); // OK, because Size has at least feet',
+          },
+        ],
+      },
+    ],
   },
   variableDeclaration: {
     name: 'Variable Declaration',
     description: 'Syntax and rules for declaring variables in TypeScript.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'let and const',
+        tags: ['variable declaration', 'typescript', 'let', 'const'],
+        description:
+          'Learn the differences between let and const for variable declarations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using let and const',
+            description: 'Examples of declaring variables using let and const.',
+            code: 'let count = 0;\ncount = 1; // OK\nconst name = "Alice";\n// name = "Bob"; // Error: Assignment to constant variable.',
+          },
+        ],
+      },
+      {
+        name: 'Type Annotations',
+        tags: ['variable declaration', 'typescript', 'type annotations'],
+        description: 'Specify types for variables using type annotations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Declaring Variables with Type Annotations',
+            description: 'Add type annotations to variable declarations.',
+            code: 'let isDone: boolean = false;\nlet age: number = 25;\nlet username: string = "Alice";',
+          },
+        ],
+      },
+      {
+        name: 'Variable Scope',
+        tags: ['variable declaration', 'typescript', 'scope'],
+        description: 'Understand the scoping rules for var, let, and const.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Scoping with var, let, and const',
+            description: 'Differences in scoping with var, let, and const.',
+            code: 'if (true) {\n  var x = 10;\n  let y = 20;\n  const z = 30;\n}\nconsole.log(x); // 10\n// console.log(y); // Error: y is not defined\n// console.log(z); // Error: z is not defined',
+          },
+        ],
+      },
+      {
+        name: 'Destructuring Assignment',
+        tags: ['variable declaration', 'typescript', 'destructuring'],
+        description:
+          'Use destructuring to extract values from arrays and objects.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Array and Object Destructuring',
+            description: 'Examples of destructuring arrays and objects.',
+            code: 'let [a, b] = [1, 2];\nconsole.log(a, b); // 1, 2\nlet { name, age } = { name: "Alice", age: 25 };\nconsole.log(name, age); // Alice, 25',
+          },
+        ],
+      },
+    ],
   },
   narrowing: {
     name: 'Type Narrowing',
