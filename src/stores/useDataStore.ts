@@ -1,36 +1,23 @@
 import { defineStore } from 'pinia'
-import { ref, type Ref, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { docs } from '@/data/docs'
 
+import type { Ref } from 'vue'
 import type {
   TypeScriptDocs,
   Topic,
+  TopicKey,
   SubTopic,
   TopicTree,
-  TopicKey,
+  Example,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
   const documentation: Ref<TypeScriptDocs> = ref(docs)
+  const selectedTopic = ref<TopicKey | undefined>()
+  const selectedSubtopic = ref<number | undefined>()
 
-  // const topics = computed(() => {
-  //   return Object.keys(documentation.value).map(key => {
-  //     const topic = documentation.value[key]
-  //     return {
-  //       // name: topic.name,
-  //       // key,
-  //       // description: topic.description,
-  //       // level: topic.level,
-  //       tags: topic.topics.map(subTopic => subTopic.tags).flat(),
-  //       // topics: topic.topics.map((subTopic) => subTopic.name)
-  //     }
-  //   })
-  // })
-
-  const selectedTopic = ref<TopicKey>()
-  const selectedSubtopic = ref<number>()
-
-  const activeData = computed((): Topic | SubTopic => {
+  const activeData = computed((): Topic | SubTopic | null => {
     if (selectedTopic.value && selectedSubtopic.value) {
       return documentation.value[selectedTopic.value].subTopics[
         selectedSubtopic.value
@@ -43,16 +30,16 @@ export const useDataStore = defineStore('dataStore', () => {
   })
 
   const topicTree = computed((): TopicTree[] => {
-    return Object.keys(documentation.value).map(key => {
-      const topic = documentation.value[key]
+    return Object.keys(documentation.value).map((key: string) => {
+      const topic: Topic = documentation.value[key]
       return {
         key: key,
         label: topic.name,
-        children: topic.subTopics.map(subTopic => ({
-          key: subTopic,
+        children: topic.subTopics.map((subTopic: SubTopic) => ({
+          key: subTopic.name,
           label: subTopic.name,
-          children: subTopic.examples.map(example => ({
-            key: example,
+          children: subTopic.examples.map((example: Example) => ({
+            key: example.title,
             label: example.title,
           })),
         })),
@@ -68,7 +55,6 @@ export const useDataStore = defineStore('dataStore', () => {
 
   return {
     documentation,
-    // topics,
     selectedTopic,
     selectedSubtopic,
     activeData,

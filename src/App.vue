@@ -24,10 +24,9 @@ router.afterEach(setLayout);
 </script>
 
 <template>
-  <div>
+  <div class="bg-slate-200 min-h-screen">
     <component :key="currentLayout" v-bind:is="currentLayout">
       <RouterView />
     </component>
   </div>
 </template>
-

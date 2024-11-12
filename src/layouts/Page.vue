@@ -4,7 +4,7 @@ import AppHeader from '@/components/layout/AppHeader.vue';
 
 <template>
   <div>
-    <header class="col-span-full">
+    <header class="bg-white col-span-full">
       <AppHeader />
     </header>
     <main>
