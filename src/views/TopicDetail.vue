@@ -6,14 +6,6 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import type { SubTopic } from '@/types/DataModel'
 import { useDataStore } from '@/stores/useDataStore'
-import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
-import CodeBlock from '@/components/detail/CodeBlock.vue'
-import pageLayout from '@/components/pageLayout.vue'
-import Card from 'primevue/card'
-import Button from 'primevue/button'
-import type { SubTopic } from '@/types/DataModel'
-import { useDataStore } from '@/stores/useDataStore'
 import { router } from '@/router'
 
 const { activeData } = storeToRefs(useDataStore())
@@ -29,8 +21,8 @@ const data = computed(() => activeData.value as SubTopic)
         :key="tag"
         :label="tag"
         severity="secondary"
+        @click="router.push({ path: '0'} })"
       />
-      <Button label="Second example" severity="secondary" />
     </div>
     <Card>
       <template #title>
