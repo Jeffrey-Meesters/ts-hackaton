@@ -1,6 +1,6 @@
 type Level = 'basic' | 'advanced' | 'expert'
 
-type Example = {
+export type Example = {
   title?: string
   description?: string
   code: string

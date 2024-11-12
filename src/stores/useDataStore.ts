@@ -1,56 +1,45 @@
 import { defineStore } from 'pinia'
-import { ref, type Ref, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { docs } from '@/data/docs'
 
-import {
-  type TypeScriptDocs,
-  type Topic,
-  type SubTopic,
-  type TopicTree,
+import type { Ref } from 'vue'
+import type {
+  TypeScriptDocs,
+  Topic,
+  TopicKey,
+  SubTopic,
+  TopicTree,
+  Example,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
   const documentation: Ref<TypeScriptDocs> = ref(docs)
+  const selectedTopic = ref<TopicKey | undefined>()
+  const selectedSubtopic = ref<number | undefined>()
 
-  // const topics = computed(() => {
-  //   return Object.keys(documentation.value).map(key => {
-  //     const topic = documentation.value[key]
-  //     return {
-  //       // name: topic.name,
-  //       // key,
-  //       // description: topic.description,
-  //       // level: topic.level,
-  //       tags: topic.topics.map(subTopic => subTopic.tags).flat(),
-  //       // topics: topic.topics.map((subTopic) => subTopic.name)
-  //     }
-  //   })
-  // })
-
-  const selectedTopic: Ref<Topic | null> = ref(null)
-  const selectedSubtopic: Ref<SubTopic | null> = ref(null)
-
-  const activeData = computed((): Topic | SubTopic => {
-    if (selectedSubtopic.value) {
-      return selectedSubtopic.value
+  const activeData = computed((): Topic | SubTopic | null => {
+    if (selectedTopic.value && selectedSubtopic.value) {
+      return documentation.value[selectedTopic.value].subTopics[
+        selectedSubtopic.value
+      ]
     }
     if (selectedTopic.value) {
-      return selectedTopic.value
+      return documentation.value[selectedTopic.value]
     }
     return null
   })
 
   const topicTree = computed((): TopicTree[] => {
-    return Object.keys(documentation.value).map(key => {
-      const topic = documentation.value[key]
+    return Object.keys(documentation.value).map((key: string) => {
+      const topic: Topic = documentation.value[key]
       return {
         key: key,
         label: topic.name,
-        children: topic.subTopics.map(subTopic => ({
-          key: subTopic,
+        children: topic.subTopics.map((subTopic: SubTopic) => ({
+          key: subTopic.name,
           label: subTopic.name,
-          description: subTopic.description,
-          children: subTopic.examples.map(example => ({
-            key: example,
+          children: subTopic.examples.map((example: Example) => ({
+            key: example.title,
             label: example.title,
           })),
         })),
@@ -58,73 +47,18 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
+  const threeRandomTopics = computed((): Topic[] => {
+    const keys = Object.keys(documentation.value)
+    const randomKeys = keys.sort(() => Math.random() - 0.5).slice(0, 3)
+    return randomKeys.map(key => documentation.value[key])
+  })
+
   return {
     documentation,
-    // topics,
     selectedTopic,
     selectedSubtopic,
     activeData,
     topicTree,
+    threeRandomTopics,
   }
 })
-
-export const NodeService = {
-  getTreeNodesData() {
-    return Promise.resolve([
-      {
-        key: '0',
-        label: 'Root',
-        children: [
-          {
-            key: '0-0',
-            label: 'Child 1',
-            children: [
-              {
-                key: '0-0-0',
-                label: 'Grandchild 1-1',
-              },
-              {
-                key: '0-0-1',
-                label: 'Grandchild 1-2',
-              },
-            ],
-          },
-          {
-            key: '0-1',
-            label: 'Child 2',
-            children: [
-              {
-                key: '0-1-0',
-                label: 'Grandchild 2-1',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        key: '1',
-        label: 'Root 2',
-        children: [
-          {
-            key: '1-0',
-            label: 'Child 1',
-          },
-          {
-            key: '1-1',
-            label: 'Child 2',
-            children: [
-              {
-                key: '1-1-0',
-                label: 'Grandchild 2-1',
-              },
-              {
-                key: '1-1-1',
-                label: 'Grandchild 2-2',
-              },
-            ],
-          },
-        ],
-      },
-    ])
-  },
-}

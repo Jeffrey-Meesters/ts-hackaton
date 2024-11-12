@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import CodeBlock from '@/components/detail/CodeBlock.vue'
-
+import pageLayout from '@/components/pageLayout.vue'
 import Card from 'primevue/card'
+import Button from 'primevue/button'
 
 // import { useDataStore } from '@/stores/useDataStore'
 // const dataStore = useDataStore()
@@ -23,14 +24,7 @@ const data = {
           title: 'Basic Usage',
           description:
             'Use `Partial<T>` to make all properties of an interface optional.',
-          code: `
-interface User {
-  id: number;
-  name: string;
-}
-
-const partialUser: Partial<User> = { name: "Alice" }; // id is optional
-              `,
+          code: '\ninterface User {\n  id: number;\n  name: string;\n}\n\nconst partialUser: Partial<User> = { name: "Alice" }; // id is optional\n              ',
         },
       ],
     },
@@ -39,26 +33,28 @@ const partialUser: Partial<User> = { name: "Alice" }; // id is optional
 </script>
 
 <template>
-  <div class="w-full h-screen bg-slate-300">
-    <div class="mb-4 h-[10vh] flex justify-center items-center bg-[#007acc]">
-      <h1 class="text-6xl text-white">{{ data.name }}</h1>
-    </div>
-    <article class="w-3/4 mx-auto">
-      <p class="mb-4">
-        {{ data.description }}
-      </p>
-
-      <Card v-for="subTopic in data.subTopics" :key="subTopic.name">
-        <template #title>
-          <h2 class="mb-0">{{ subTopic.name }}</h2>
-        </template>
-        <template #content>
-          <p>{{ subTopic.description }}</p>
-          <div v-for="example in subTopic.examples" :key="example.title">
-            <CodeBlock :title="example.title" :code="example.code" />
-          </div>
-        </template>
-      </Card>
-    </article>
-  </div>
+  <pageLayout :name="data.name">
+    <template #content>
+      <article class="w-3/4 mx-auto">
+        <div class="mb-2">
+          <Button class="mr-2" label="First example" severity="secondary" />
+          <Button label="Second example" severity="secondary" />
+        </div>
+        <Card>
+          <template #title>
+            <h2 class="mb-0">{{ data.subTopics[0].name }}</h2>
+          </template>
+          <template #content>
+            <p>{{ data.subTopics[0].description }}</p>
+            <div
+              v-for="example in data.subTopics[0].examples"
+              :key="example.title"
+            >
+              <CodeBlock :title="example.title" :code="example.code" />
+            </div>
+          </template>
+        </Card>
+      </article>
+    </template>
+  </pageLayout>
 </template>

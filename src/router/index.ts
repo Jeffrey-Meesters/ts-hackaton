@@ -1,3 +1,4 @@
+import type { TopicKey } from '@/types/DataModel'
 import {
   createRouter,
   createWebHistory,
@@ -16,6 +17,23 @@ const router = createRouter({
       component: HomeView,
       meta: {
         layout: 'plain',
+      },
+    },
+
+    {
+      path: '/getStarted',
+      name: 'get started',
+      component: () => import('../views/GetStarted.vue'),
+      meta: {
+        layout: 'page',
+      },
+    },
+    {
+      path: '/topics',
+      name: 'topics',
+      component: () => import('../views/Topics.vue'),
+      meta: {
+        layout: 'page',
       },
     },
     {
@@ -50,21 +68,49 @@ const router = createRouter({
   ],
 })
 
+const updateSubtopic = (
+  to: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  const dataStore = useDataStore()
+  const topicKey = to.params.topic as TopicKey
+  const subTopicKey = +to.params.subTopic
+  const subtopics = dataStore?.documentation[topicKey]?.subTopics
+
+  if (typeof subTopicKey === 'number' && subtopics?.[subTopicKey]) {
+    dataStore.selectedSubtopic = subTopicKey
+    next()
+  } else {
+    next({ name: 'error' })
+  }
+}
+
+const updateTopic = (
+  to: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  const dataStore = useDataStore()
+  const topicKey = to.params.topic as TopicKey
+
+  if (topicKey && dataStore?.documentation[topicKey]) {
+    dataStore.selectedTopic = topicKey
+    dataStore.selectedSubtopic = undefined
+    next()
+  } else {
+    next({ name: 'error' })
+  }
+}
+
 export const beforeEachFn = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
-  const dataStore = useDataStore()
+  // This is a guard to check if the topic exists in the documentation
+  if (to.name === 'topic') return updateTopic(to, next)
+  if (to.name === 'detail') return updateSubtopic(to, next)
 
-  if (to.name === 'home') return next()
-  if (to.name === 'error') return next()
-
-  if (dataStore?.documentation[to.params.topic]) {
-    next()
-  } else {
-    next({ name: 'error' })
-  }
+  next()
 }
 
 router.beforeEach(beforeEachFn)

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import TopicCard from '@/components/topicCard/TopicCard.vue'
-
+import TopicTree from '@/components/topicTree/TopicTree.vue';
+import Search from '@/components/Search.vue';
+import Title from '@/components/home/Title.vue';
 </script>
 
 <template>
   <section class="md:max-w-4xl">
     <h1>Homepage</h1>
-    <TopicCard></TopicCard>
+    <TopicTree></TopicTree>
   </section>
 </template>
