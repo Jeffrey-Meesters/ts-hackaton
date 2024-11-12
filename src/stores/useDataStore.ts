@@ -2,31 +2,39 @@ import { defineStore } from 'pinia'
 import { ref, type Ref, computed } from 'vue'
 import { docs } from '@/data/docs'
 
-import {
-  type TypeScriptDocs,
-  type Topic,
-  type SubTopic,
-  type TopicTree,
+import type {
+  TypeScriptDocs,
+  Topic,
+  SubTopic,
+  TopicTree,
+  TopicKey,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
   const documentation: Ref<TypeScriptDocs> = ref(docs)
-  const selectedTopic: Ref<string> = ref('')
-  const selectedSubtopic: Ref<string> = ref('')
+
+  // const topics = computed(() => {
+  //   return Object.keys(documentation.value).map(key => {
+  //     const topic = documentation.value[key]
+  //     return {
+  //       // name: topic.name,
+  //       // key,
+  //       // description: topic.description,
+  //       // level: topic.level,
+  //       tags: topic.topics.map(subTopic => subTopic.tags).flat(),
+  //       // topics: topic.topics.map((subTopic) => subTopic.name)
+  //     }
+  //   })
+  // })
+
+  const selectedTopic = ref<TopicKey>()
+  const selectedSubtopic = ref<number>()
 
   const activeData = computed((): Topic | SubTopic => {
-    if (selectedSubtopic.value) {
-      const topicKeys = Object.keys(documentation.value)
-      for (const key of topicKeys) {
-        const topic: Topic = documentation.value[key]
-        const subTopic: SubTopic = topic.subTopics.find(
-          subTopic => subTopic.name === selectedSubtopic.value,
-        )
-        if (subTopic) {
-          return subTopic
-        }
-      }
-      return null
+    if (selectedTopic.value && selectedSubtopic.value) {
+      return documentation.value[selectedTopic.value].subTopics[
+        selectedSubtopic.value
+      ]
     }
     if (selectedTopic.value) {
       return documentation.value[selectedTopic.value]
@@ -65,5 +73,6 @@ export const useDataStore = defineStore('dataStore', () => {
     selectedSubtopic,
     activeData,
     topicTree,
+    threeRandomTopics,
   }
 })
