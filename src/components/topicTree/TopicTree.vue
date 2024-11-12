@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+
 import { useDataStore } from '@/stores/useDataStore'
+import { type TopicTree } from '@/types/DataModel';
 
 const dataStore = useDataStore();
-const NodeService = dataStore.topicTree;
-
-interface TreeNode {
-  key: string;
-  label: string;
-  children?: TreeNode[];
-}
-
-const nodes = ref<TreeNode[] | undefined>(undefined);
-const expandedKeys = ref<Record<string, boolean>>({});
 const router = useRouter();
+const NodeService = dataStore.topicTree;
+const nodes = ref<TopicTree[] | null>(null);
+const expandedKeys = ref<Record<string, boolean>>({});
 
 onMounted(() => {
   nodes.value = NodeService;
@@ -33,7 +28,7 @@ const collapseAll = () => {
   expandedKeys.value = {};
 };
 
-const expandNode = (node: TreeNode) => {
+const expandNode = (node: TopicTree) => {
   if (node.children && node.children.length) {
     expandedKeys.value[node.key] = true;
     for (const child of node.children) {
@@ -42,8 +37,10 @@ const expandNode = (node: TreeNode) => {
   }
 };
 
-const onNodeClick = (node: TreeNode) => {
-  router.push({ name: 'topic', params: { topic: node.label } });
+const onNodeClick = (node: TopicTree) => {
+  if (node !== undefined) {
+    router.push({ name: 'topic', params: { topic: node.label } });
+  }
 };
 </script>
 
