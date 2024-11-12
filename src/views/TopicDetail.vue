@@ -16,11 +16,11 @@ const router = useRouter()
 
 <template>
   <article class="w-3/4 mx-auto">
-    <div class="mb-2">
+    <div class="mb-5">
       <Button
         v-for="(name, index) in activeTopicSubtopicList"
         class="mr-2 !bg-[#303036] !text-white !border-0"
-        :class="index === selectedSubtopic ? '!bg-green-500' : ''"
+        :class="index === selectedSubtopic ? '!bg-green-800' : ''"
         :key="name"
         :label="name"
         size="small"
