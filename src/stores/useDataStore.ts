@@ -11,30 +11,25 @@ import {
 
 export const useDataStore = defineStore('dataStore', () => {
   const documentation: Ref<TypeScriptDocs> = ref(docs)
-
-  // const topics = computed(() => {
-  //   return Object.keys(documentation.value).map(key => {
-  //     const topic = documentation.value[key]
-  //     return {
-  //       // name: topic.name,
-  //       // key,
-  //       // description: topic.description,
-  //       // level: topic.level,
-  //       tags: topic.topics.map(subTopic => subTopic.tags).flat(),
-  //       // topics: topic.topics.map((subTopic) => subTopic.name)
-  //     }
-  //   })
-  // })
-
-  const selectedTopic: Ref<Topic | null> = ref(null)
-  const selectedSubtopic: Ref<SubTopic | null> = ref(null)
+  const selectedTopic: Ref<string> = ref('')
+  const selectedSubtopic: Ref<string> = ref('')
 
   const activeData = computed((): Topic | SubTopic => {
     if (selectedSubtopic.value) {
-      return selectedSubtopic.value
+      const topicKeys = Object.keys(documentation.value)
+      for (const key of topicKeys) {
+        const topic: Topic = documentation.value[key]
+        const subTopic: SubTopic = topic.subTopics.find(
+          subTopic => subTopic.name === selectedSubtopic.value,
+        )
+        if (subTopic) {
+          return subTopic
+        }
+      }
+      return null
     }
     if (selectedTopic.value) {
-      return selectedTopic.value
+      return documentation.value[selectedTopic.value]
     }
     return null
   })
@@ -57,6 +52,12 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
+  const threeRandomTopics = computed((): Topic[] => {
+    const keys = Object.keys(documentation.value)
+    const randomKeys = keys.sort(() => Math.random() - 0.5).slice(0, 3)
+    return randomKeys.map(key => documentation.value[key])
+  })
+
   return {
     documentation,
     // topics,
@@ -66,64 +67,3 @@ export const useDataStore = defineStore('dataStore', () => {
     topicTree,
   }
 })
-
-export const NodeService = {
-  getTreeNodesData() {
-    return Promise.resolve([
-      {
-        key: '0',
-        label: 'Root',
-        children: [
-          {
-            key: '0-0',
-            label: 'Child 1',
-            children: [
-              {
-                key: '0-0-0',
-                label: 'Grandchild 1-1',
-              },
-              {
-                key: '0-0-1',
-                label: 'Grandchild 1-2',
-              },
-            ],
-          },
-          {
-            key: '0-1',
-            label: 'Child 2',
-            children: [
-              {
-                key: '0-1-0',
-                label: 'Grandchild 2-1',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        key: '1',
-        label: 'Root 2',
-        children: [
-          {
-            key: '1-0',
-            label: 'Child 1',
-          },
-          {
-            key: '1-1',
-            label: 'Child 2',
-            children: [
-              {
-                key: '1-1-0',
-                label: 'Grandchild 2-1',
-              },
-              {
-                key: '1-1-1',
-                label: 'Grandchild 2-2',
-              },
-            ],
-          },
-        ],
-      },
-    ])
-  },
-}
