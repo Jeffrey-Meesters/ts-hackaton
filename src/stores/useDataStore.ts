@@ -11,6 +11,7 @@ import type {
   TopicTree,
   Example,
   CardItem,
+  SearchItem,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
@@ -48,7 +49,8 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
-  // const searchList = computed((): Topic[] => {
+  // const searchList = computed((): SearchItem[] => {
+  //   return Object.keys(documentation.value).map((topicName: string) => {})
   //   searchList = [topicName: 'name', subtopics: [{subtopicname: 'name', tags: ['tag1', 'tag2']}]]
   // })
 
@@ -58,7 +60,7 @@ export const useDataStore = defineStore('dataStore', () => {
       return subTopics.map((subTopic: SubTopic) => {
         return {
           name: subTopic.name,
-          code: subTopic.examples[0].code,
+          code: subTopic.examples[0] ? subTopic.examples[0].code : [],
           description: subTopic.description,
         }
       })
@@ -72,5 +74,6 @@ export const useDataStore = defineStore('dataStore', () => {
     activeData,
     topicTree,
     cardList,
+    // searchList,
   }
 })
