@@ -34,12 +34,17 @@ const data = computed(() => activeData.value as Topic)
                 <AccordionHeader>{{ tab.name }} </AccordionHeader>
                 <AccordionContent>
                   <p class="m-0">{{ tab.description }}</p>
-                  <Button
-                    class="mt-1"
-                    label="Read Article"
-                    variant="text"
-                    raised
-                  />
+                  <div class="text-right">
+                    <Button
+                      icon="pi pi-link"
+                      size="small"
+                      class="mt-2"
+                      label="Read Article"
+                      variant="text"
+                      severity="secondary"
+                      raised
+                    />
+                  </div>
                 </AccordionContent>
               </AccordionPanel>
             </Accordion>
