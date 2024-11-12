@@ -19,6 +19,12 @@ export const useDataStore = defineStore('dataStore', () => {
   const selectedTopic = ref<TopicKey | undefined>()
   const selectedSubtopic = ref<number | undefined>()
 
+  const selectedTopicName = computed((): string => {
+    return selectedTopic.value
+      ? documentation.value[selectedTopic.value].name
+      : ''
+  })
+
   const activeData = computed((): Topic | SubTopic | null => {
     if (selectedTopic.value && typeof selectedSubtopic.value === 'number') {
       return documentation.value[selectedTopic.value].subTopics[
@@ -96,5 +102,6 @@ export const useDataStore = defineStore('dataStore', () => {
     cardList,
     searchList,
     activeTopicSubtopicList,
+    selectedTopicName,
   }
 })
