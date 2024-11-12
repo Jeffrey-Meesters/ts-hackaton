@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import pageLayout from '@/components/pageLayout.vue'
-import { Card } from 'primevue'
+import Card from 'primevue/card'
+import Button from 'primevue/button'
 import Accordion from 'primevue/accordion'
 import AccordionPanel from 'primevue/accordionpanel'
 import AccordionHeader from 'primevue/accordionheader'
@@ -30,9 +31,15 @@ const data = computed(() => activeData.value as Topic)
                 :key="tab.name"
                 :value="tab.name"
               >
-                <AccordionHeader>{{ tab.name }}</AccordionHeader>
+                <AccordionHeader>{{ tab.name }} </AccordionHeader>
                 <AccordionContent>
                   <p class="m-0">{{ tab.description }}</p>
+                  <Button
+                    class="mt-1"
+                    label="Read Article"
+                    variant="text"
+                    raised
+                  />
                 </AccordionContent>
               </AccordionPanel>
             </Accordion>
