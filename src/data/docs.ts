@@ -585,14 +585,134 @@ export const docs: TypeScriptDocs = {
     description: 'Derive new types from existing types.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Type Aliases',
+        tags: ['types from types', 'typescript', 'type aliases'],
+        description:
+          'Create type aliases to simplify complex type definitions.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Defining a Type Alias',
+            description:
+              'Use a type alias to create a simpler name for a type.',
+            code: 'type Point = { x: number; y: number; };\nconst point: Point = { x: 10, y: 20 };',
+          },
+        ],
+      },
+      {
+        name: 'Union Types',
+        tags: ['types from types', 'typescript', 'union types'],
+        description: 'Combine multiple types into a single union type.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Creating Union Types',
+            description:
+              'Define a type that can be one of several types using unions.',
+            code: 'type Status = "success" | "error" | "loading";\nfunction handleStatus(status: Status) {\n  if (status === "success") {\n    console.log("Operation successful");\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'Intersection Types',
+        tags: ['types from types', 'typescript', 'intersection types'],
+        description:
+          'Combine multiple types into one using intersection types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Defining Intersection Types',
+            description:
+              'Use intersection types to create a type that has all properties of multiple types.',
+            code: 'type Draggable = { drag: () => void; };\ntype Resizable = { resize: () => void; };\ntype UIElement = Draggable & Resizable;\nconst element: UIElement = {\n  drag: () => console.log("Drag"),\n  resize: () => console.log("Resize")\n};',
+          },
+        ],
+      },
+      {
+        name: 'Mapped Types',
+        tags: ['types from types', 'typescript', 'mapped types'],
+        description:
+          'Create new types by transforming properties of existing types.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Creating Mapped Types',
+            description:
+              'Use mapped types to transform each property in a type.',
+            code: 'type ReadOnly<T> = {\n  readonly [P in keyof T]: T[P];\n};\ninterface Person {\n  name: string;\n  age: number;\n}\nconst readonlyPerson: ReadOnly<Person> = {\n  name: "Alice",\n  age: 30\n};\n// readonlyPerson.name = "Bob"; // Error: Cannot assign to \'name\' because it is a read-only property.',
+          },
+        ],
+      },
+    ],
   },
   keyofTypeOperator: {
     name: 'Keyof Type Operator',
     description: 'Retrieve keys of a given type as a union.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Basic Usage of Keyof',
+        tags: ['keyof', 'typescript', 'type operator'],
+        description:
+          'Learn how to use the keyof operator to get keys of an object type.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Keyof with Interfaces',
+            description:
+              'Retrieve keys of an interface using the keyof operator.',
+            code: 'interface User {\n  id: number;\n  name: string;\n  age: number;\n}\ntype UserKeys = keyof User; // "id" | "name" | "age"',
+          },
+        ],
+      },
+      {
+        name: 'Keyof with Index Signatures',
+        tags: ['keyof', 'typescript', 'index signatures'],
+        description:
+          'Understand how keyof interacts with index signatures in types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Keyof and Index Signatures',
+            description: 'Using keyof with a type that has an index signature.',
+            code: 'type Dictionary = { [key: string]: string };\ntype DictionaryKeys = keyof Dictionary; // string or number',
+          },
+        ],
+      },
+      {
+        name: 'Keyof in Generic Constraints',
+        tags: ['keyof', 'typescript', 'generic constraints'],
+        description:
+          'Use keyof in generic type constraints to enforce certain keys.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Generic Function with Keyof Constraint',
+            description:
+              'Create a generic function that uses keyof for type constraints.',
+            code: 'function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\nconst user = { id: 1, name: "Alice" };\nconst userName = getProperty(user, "name"); // OK',
+          },
+        ],
+      },
+      {
+        name: 'Combining Keyof with Mapped Types',
+        tags: ['keyof', 'typescript', 'mapped types'],
+        description:
+          'Combine keyof with mapped types to create advanced type transformations.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Creating a Mapped Type with Keyof',
+            description:
+              'Use keyof in combination with mapped types to transform object types.',
+            code: 'type Partial<T> = {\n  [P in keyof T]?: T[P];\n};\ninterface Product {\n  name: string;\n  price: number;\n}\ntype PartialProduct = Partial<Product>; // { name?: string; price?: number; }',
+          },
+        ],
+      },
+    ],
   },
   typeofTypeOperator: {
     name: 'Typeof Type Operator',
