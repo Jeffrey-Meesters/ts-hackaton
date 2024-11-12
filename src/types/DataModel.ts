@@ -6,6 +6,16 @@ export type CardItem = {
   description: string
 }
 
+export type SearchItem = {
+  topicName: string
+  subtopics: [
+    {
+      subTopicName: string
+      tags: string[]
+    },
+  ]
+}
+
 export type Example = {
   title?: string
   description?: string
@@ -65,6 +75,3 @@ export type TypeScriptDocs = {
 }
 
 export type TopicKey = keyof TypeScriptDocs
-export type PartialTypeScriptDocs = Partial<TypeScriptDocs>;
-
- 
