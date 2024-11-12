@@ -78,6 +78,7 @@ const updateSubtopic = (
   const subtopics = dataStore?.documentation[topicKey]?.subTopics
 
   if (typeof subTopicKey === 'number' && subtopics?.[subTopicKey]) {
+    dataStore.selectedTopic = topicKey
     dataStore.selectedSubtopic = subTopicKey
     next()
   } else {

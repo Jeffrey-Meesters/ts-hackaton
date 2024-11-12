@@ -1,7 +1,7 @@
 <template>
   <nav class="border-b border-b-secondary">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between gap-3 h-20">
-      <div class="lg:flex-1 flex items-center gap-1.5">
+      <div class="lg:me-12 flex items-center gap-1.5">
         <router-link
           to="/"
           aria-current="page"

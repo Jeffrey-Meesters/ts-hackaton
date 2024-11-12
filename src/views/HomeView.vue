@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import TopicTree from '@/components/topicTree/TopicTree.vue';
 import Search from '@/components/Search.vue';
 import Title from '@/components/home/Title.vue';
 </script>
 
 <template>
-  <section class="md:max-w-4xl flex justify-center items-center flex-col mx-auto pt-[200px]">
-    <Title />
-    <div class="w-1/2 min-w-20 mt-20">
-      <Search />
+  <section class="flex justify-center items-center flex-col">
+    <div class="bg-white min-w-20 flex flex-col items-center mx-auto pt-[200px] w-full">
+      <Title class="md:max-w-4xl" />
+      <Search class="my-20 min-w-20 max-w-[40rem]" />
     </div>
-    <TopicTree />
   </section>
 </template>
