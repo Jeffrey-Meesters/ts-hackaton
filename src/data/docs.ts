@@ -521,7 +521,64 @@ export const docs: TypeScriptDocs = {
     description: 'Defining and working with complex object structures.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Defining Object Types',
+        tags: ['object types', 'typescript', 'interfaces'],
+        description: 'Learn how to define object types using interfaces.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Interface Definition',
+            description:
+              'Create an interface to define the shape of an object.',
+            code: 'interface Person {\n  name: string;\n  age: number;\n}\nconst person: Person = {\n  name: "Alice",\n  age: 30\n};',
+          },
+        ],
+      },
+      {
+        name: 'Optional Properties',
+        tags: ['object types', 'typescript', 'optional properties'],
+        description: 'Define object types with optional properties.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Optional Properties in Interfaces',
+            description:
+              'Specify optional properties in an interface using the ? operator.',
+            code: 'interface Car {\n  make: string;\n  model: string;\n  year?: number;\n}\nconst car: Car = {\n  make: "Toyota",\n  model: "Corolla"\n};',
+          },
+        ],
+      },
+      {
+        name: 'Index Signatures',
+        tags: ['object types', 'typescript', 'index signatures'],
+        description:
+          'Use index signatures to define objects with flexible property names.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Defining Index Signatures',
+            description:
+              'Create an object type with dynamic property names using an index signature.',
+            code: 'interface StringDictionary {\n  [key: string]: string;\n}\nconst dictionary: StringDictionary = {\n  hello: "world",\n  goodbye: "everyone"\n};',
+          },
+        ],
+      },
+      {
+        name: 'Nested Object Types',
+        tags: ['object types', 'typescript', 'nested objects'],
+        description: 'Define complex object types with nested structures.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Nested Object Type Example',
+            description: 'Create an interface with nested object properties.',
+            code: 'interface Address {\n  street: string;\n  city: string;\n}\ninterface User {\n  name: string;\n  address: Address;\n}\nconst user: User = {\n  name: "Alice",\n  address: {\n    street: "123 Main St",\n    city: "Wonderland"\n  }\n};',
+          },
+        ],
+      },
+    ],
   },
   typesFromTypes: {
     name: 'Types from Types',
