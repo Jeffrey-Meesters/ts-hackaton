@@ -43,18 +43,18 @@ const partialUser: Partial<User> = { name: "Alice" }; // id is optional
     <div class="mb-4 h-[10vh] flex justify-center items-center bg-[#007acc]">
       <h1 class="text-6xl text-white">{{ data.name }}</h1>
     </div>
+    Utility - Generic
     <article class="w-3/4 mx-auto">
-      <p class="mb-4">
-        {{ data.description }}
-      </p>
-
-      <Card v-for="subTopic in data.subTopics" :key="subTopic.name">
+      <Card>
         <template #title>
-          <h2 class="mb-0">{{ subTopic.name }}</h2>
+          <h2 class="mb-0">{{ data.subTopics[0].name }}</h2>
         </template>
         <template #content>
-          <p>{{ subTopic.description }}</p>
-          <div v-for="example in subTopic.examples" :key="example.title">
+          <p>{{ data.subTopics[0].description }}</p>
+          <div
+            v-for="example in data.subTopics[0].examples"
+            :key="example.title"
+          >
             <CodeBlock :title="example.title" :code="example.code" />
           </div>
         </template>
