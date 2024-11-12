@@ -1,3 +1,4 @@
+import type { TopicKey } from '@/types/DataModel'
 import {
   createRouter,
   createWebHistory,
@@ -16,6 +17,23 @@ const router = createRouter({
       component: HomeView,
       meta: {
         layout: 'plain',
+      },
+    },
+
+    {
+      path: '/getStarted',
+      name: 'get started',
+      component: () => import('../views/GetStarted.vue'),
+      meta: {
+        layout: 'page',
+      },
+    },
+    {
+      path: '/topics',
+      name: 'topics',
+      component: () => import('../views/Topics.vue'),
+      meta: {
+        layout: 'page',
       },
     },
     {
@@ -57,14 +75,29 @@ export const beforeEachFn = async (
 ) => {
   const dataStore = useDataStore()
 
-  if (to.name === 'home') return next()
-  if (to.name === 'error') return next()
+  // This is a guard to check if the topic exists in the documentation
+  if (to.name === 'topic' || to.name === 'detail') {
+    const topicKey = to.params.topic as TopicKey
 
-  if (dataStore?.documentation[to.params.topic]) {
-    next()
-  } else {
-    next({ name: 'error' })
+    if (topicKey && dataStore?.documentation[topicKey]) {
+      dataStore.selectedTopic = topicKey
+      const subtopics = dataStore?.documentation[topicKey]?.subTopics
+      const subTopicKey = +to.params.subTopic
+
+      if (to.name === 'detail') {
+        if (typeof subTopicKey === 'number' && subtopics?.[subTopicKey]) {
+          next()
+        } else {
+          next({ name: 'error' })
+        }
+      }
+      next()
+    } else {
+      next({ name: 'error' })
+    }
   }
+
+  next()
 }
 
 router.beforeEach(beforeEachFn)
