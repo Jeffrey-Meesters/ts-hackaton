@@ -26,7 +26,7 @@ router.afterEach(setLayout);
 
 <template>
   <div class="bg-slate-200 min-h-screen flex flex-col">
-    <component :key="currentLayout" v-bind:is="currentLayout" class="flex-1">
+    <component :key="currentLayout" v-bind:is="currentLayout" class="flex-1 pb-12">
       <RouterView />
     </component>
     <MainFooter />

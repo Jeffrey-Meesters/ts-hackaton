@@ -20,9 +20,7 @@ const data = computed(() => activeData.value as Topic)
     <template #content>
       <article class="w-3/4 mx-auto">
         <Card>
-          <template #title>
-            <h2 class="mb-0">{{ data.name }}</h2>
-          </template>
+          <template #title> </template>
           <template #content>
             <p>{{ data.description }}</p>
             <Accordion value="0">
