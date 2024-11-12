@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { NodeService } from '@/service/NodeService';
+import { useRouter } from 'vue-router';
+import { useDataStore } from '@/stores/useDataStore'
+
+const dataStore = useDataStore();
+const NodeService = dataStore.topicTree;
 
 interface TreeNode {
   key: string;
@@ -9,12 +13,11 @@ interface TreeNode {
 }
 
 const nodes = ref<TreeNode[] | undefined>(undefined);
-  const expandedKeys = ref<Record<string, boolean>>({});
+const expandedKeys = ref<Record<string, boolean>>({});
+const router = useRouter();
 
 onMounted(() => {
-  NodeService.getTreeNodesData().then((data: TreeNode[]) => {
-    nodes.value = data;
-  });
+  nodes.value = NodeService;
 });
 
 const expandAll = () => {
@@ -38,6 +41,10 @@ const expandNode = (node: TreeNode) => {
     }
   }
 };
+
+const onNodeClick = (node: TreeNode) => {
+  router.push({ name: 'topic', params: { topic: node.label } });
+};
 </script>
 
 <template>
@@ -46,6 +53,15 @@ const expandNode = (node: TreeNode) => {
       <Button type="button" icon="pi pi-plus" label="Expand All" @click="expandAll" />
       <Button type="button" icon="pi pi-minus" label="Collapse All" @click="collapseAll" />
     </div>
-    <Tree v-model:expandedKeys="expandedKeys" :value="nodes" class="w-full md:w-[30rem]"></Tree>
+    <Tree
+      v-model:expandedKeys="expandedKeys"
+      :value="nodes"
+      class="w-full md:w-[30rem] cursor-pointer"
+      @node-click="onNodeClick"
+    >
+      <template #default="{ node }">
+        <span @click="onNodeClick(node)">{{ node.label }}</span>
+      </template>
+    </Tree>
   </div>
 </template>

@@ -10,7 +10,7 @@ defineProps<CodeBlockProps>()
 </script>
 
 <template>
-  <label class="text-2xl" v-if="title">{{ title }}</label>
+  <label class="font-bold underline" v-if="title">{{ title }}</label>
   <VCodeBlock
     :code="code"
     highlightjs
