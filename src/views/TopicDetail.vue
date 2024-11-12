@@ -7,9 +7,14 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import type { SubTopic } from '@/types/DataModel'
 import { useDataStore } from '@/stores/useDataStore'
+import { router } from '@/router'
 
-const { activeData } = storeToRefs(useDataStore())
+const { activeData, selectedTopic, selectedSubtopic } =
+  storeToRefs(useDataStore())
 const data = computed(() => activeData.value as SubTopic)
+console.log('activeData', activeData.value)
+console.log('selectedTopic', selectedTopic.value)
+console.log('selectedSubtopic', selectedSubtopic.value)
 </script>
 
 <template>
@@ -18,11 +23,12 @@ const data = computed(() => activeData.value as SubTopic)
       <article class="w-3/4 mx-auto">
         <div class="mb-2">
           <Button
-            v-for="tag in data.tags"
+            v-for="(tag, index) in data.tags"
             :key="tag"
             class="mr-2"
             :label="tag"
             severity="secondary"
+            @click="router.push({ path: `${selectedTopic}`)"
           />
         </div>
         <Card>
