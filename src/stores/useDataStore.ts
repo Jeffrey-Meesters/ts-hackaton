@@ -10,6 +10,7 @@ import type {
   SubTopic,
   TopicTree,
   Example,
+  CardItem,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
@@ -47,10 +48,21 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
-  const threeRandomTopics = computed((): Topic[] => {
-    const keys = Object.keys(documentation.value)
-    const randomKeys = keys.sort(() => Math.random() - 0.5).slice(0, 3)
-    return randomKeys.map(key => documentation.value[key])
+  // const searchList = computed((): Topic[] => {
+  //   searchList = [topicName: 'name', subtopics: [{subtopicname: 'name', tags: ['tag1', 'tag2']}]]
+  // })
+
+  const cardList = computed((): CardItem[] => {
+    return Object.keys(documentation.value).map(topic => {
+      const subTopics = documentation.value[topic].subTopics
+      return subTopics.map((subTopic: SubTopic) => {
+        return {
+          name: subTopic.name,
+          code: subTopic.examples[0].code,
+          description: subTopic.description,
+        }
+      })
+    })
   })
 
   return {
@@ -59,6 +71,6 @@ export const useDataStore = defineStore('dataStore', () => {
     selectedSubtopic,
     activeData,
     topicTree,
-    threeRandomTopics,
+    cardList,
   }
 })

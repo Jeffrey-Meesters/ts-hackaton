@@ -37,8 +37,13 @@ const data = {
     <template #content>
       <article class="w-3/4 mx-auto">
         <div class="mb-2">
-          <Button class="mr-2" label="First example" severity="secondary" />
-          <Button label="Second example" severity="secondary" />
+          <Button
+            class="mr-2"
+            label="First example"
+            severity="secondary"
+            rounded
+          />
+          <Button label="Second example" severity="secondary" rounded />
         </div>
         <Card>
           <template #title>

@@ -49,7 +49,7 @@ const partialUser: Partial<User> =
   <div>
     <div v-for="node in nodes" :key="node.name">
       {{ node.examples.code }}
-      <Card style="width: 25rem; overflow: hidden" margin-top:4rem>
+      <Card style="width: 20rem; padding:1rem; margin:4rem; overflow: hidden">
         <template #header>
           <CodeBlock :code="node.examples[0].code"/>
         </template>

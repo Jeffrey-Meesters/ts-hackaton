@@ -1,10 +1,10 @@
+<script setup lang="ts">
+import TopicTree from '@/components/topicTree/TopicTree.vue';
+</script>
+
 <template>
-  <div>
+  <div class="md:max-w-4xl mx-auto mt-10">
     <h1>Topics</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dignissimos, aliquam minima nisi provident expedita delectus facere, maiores, assumenda
-      architecto iusto sequi totam perspiciatis sunt explicabo consectetur eveniet voluptas ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-      alias minima ipsam autem placeat eos quo pariatur minus modi optio cupiditate eveniet laboriosam tempore consequatur, quis reiciendis a ea quisquam.
-    </p>
+    <TopicTree class="mt-10 w-full" />
   </div>
 </template>
