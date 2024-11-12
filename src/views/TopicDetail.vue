@@ -21,7 +21,6 @@ const data = computed(() => activeData.value as SubTopic)
         :key="tag"
         :label="tag"
         severity="secondary"
-        @click="router.push({ path: '0'} })"
       />
     </div>
     <Card>

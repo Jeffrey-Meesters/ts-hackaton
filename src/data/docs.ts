@@ -458,7 +458,63 @@ export const docs: TypeScriptDocs = {
     description: 'Refine types through control flow analysis.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Type Guards',
+        tags: ['type narrowing', 'typescript', 'type guards'],
+        description: 'Use type guards to narrow types in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using typeof for Type Guards',
+            description: 'Narrow types using the typeof operator.',
+            code: 'function printId(id: string | number) {\n  if (typeof id === "string") {\n    console.log("String ID:", id.toUpperCase());\n  } else {\n    console.log("Number ID:", id.toFixed(2));\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'Instanceof Type Guard',
+        tags: ['type narrowing', 'typescript', 'instanceof'],
+        description: 'Use instanceof to narrow down object types.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using instanceof for Type Guards',
+            description: 'Narrow types using the instanceof operator.',
+            code: 'class Cat { meow() {} }\nclass Dog { bark() {} }\nfunction makeNoise(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'In Operator',
+        tags: ['type narrowing', 'typescript', 'in operator'],
+        description: 'Use the in operator to check for properties in objects.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using in for Type Guards',
+            description:
+              'Narrow types by checking for the existence of a property.',
+            code: 'type Fish = { swim: () => void };\ntype Bird = { fly: () => void };\nfunction move(animal: Fish | Bird) {\n  if ("swim" in animal) {\n    animal.swim();\n  } else {\n    animal.fly();\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'Control Flow Analysis',
+        tags: ['type narrowing', 'typescript', 'control flow'],
+        description:
+          'Understand how TypeScript uses control flow analysis to narrow types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Control Flow Based Type Narrowing',
+            description:
+              'TypeScript automatically narrows types based on control flow.',
+            code: 'function example(x: string | null) {\n  if (x === null) {\n    console.log("x is null");\n  } else {\n    console.log("x is a string:", x);\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   objectTypes: {
     name: 'Object Types',
