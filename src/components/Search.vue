@@ -18,33 +18,18 @@
             type="search" 
             id="default-search" 
             class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-            placeholder="Search Mockups, Logos..." 
+            placeholder="Search..." 
             required 
           />
           <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
         </div>
       </form>
       <div v-if="showResults">
-        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
-        <ul>
-          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
-        </ul>
-        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
-        <ul>
-          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
-        </ul>
-        <span class="bg-slate-700 text-white block py-2 pl-2">title</span>
-        <ul>
-          <li class='py-1 pl-2' @click="showResults=false">test 1</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 2</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 3</li>
-          <li class='py-1 pl-2' @click="showResults=false">test 4</li>
+        <span v-if="topics" class="bg-slate-700 text-white block py-2 pl-2">Topics</span>
+        <ul v-if="topics">
+          <li :key="key" v-for="(topic, key) of topics" class='py-1 pl-2' @click="showResults=false">
+            <router-link :to=key>{{ topic?.name }}</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -53,35 +38,40 @@
   <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { docs } from '../data/docs';
-  import type { Topic, TypeScriptDocs, TopicKey } from '@/types/DataModel'
+  import type { PartialTypeScriptDocs, SubTopic } from '@/types/DataModel'
 
   type listType = string[];
-
   const query = ref<string>('');
   const searchList = ref<listType>([]);
   const showResults = ref<boolean>(false);
   const searchContainer = ref<HTMLElement | null>(null);
-  const topics = ref<Topic[]>([]);
+  const topics = ref<PartialTypeScriptDocs | null>(null);
+  const subTopics = ref<SubTopic[] | null>(null);
   
   const fetchSearchResults = () => {
-    // console.log(docs);
-    // topics.value = Object.keys(docs).map((key: string) => {
-    //     const doc = docs[key as TopicKey]
-    //     if(doc){
 
-    //     }
-    //     // .name.includes(query.value)) return docs[topic] 
-    //     // return [null];
-    // }
-    // )
-  }
-
+    const result = Object.entries(docs).filter(([key, value]) => {
+        if(value.subTopics.length){
+            const subtopicList = value.subTopics.filter(item => {
+                if(item.name.toLowerCase().includes(query.value.toLowerCase())){
+                    return item as SubTopic;
+                }
+            })
+            subTopics.value = subtopicList;
+        }
+        if(value.name.toLowerCase().includes(query.value.toLowerCase())){
+            return [key, value]
+        }
+    })
+    topics.value = Object.fromEntries(result) as PartialTypeScriptDocs;
+    console.log(subTopics.value);
+  };
 
 const onInput = () => {
     showResults.value = query.value.length > 0;
     fetchSearchResults();
 }
-  
+
   const handleClickOutside = (event: MouseEvent) => {
     if (searchContainer.value && !searchContainer.value.contains(event.target as Node)) {
       showResults.value = false;
@@ -98,6 +88,3 @@ const onInput = () => {
   
   </script>
   
-  <style scoped>
-  /* Add your styles here if needed */
-  </style>
