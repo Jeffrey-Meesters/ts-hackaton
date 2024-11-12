@@ -6,6 +6,7 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primevue//themes/aura'
 import Tree from 'primevue/tree';
 import Button from 'primevue/button';
+import Card from 'primevue/card';
 
 import App from './App.vue'
 import router from './router'
@@ -25,5 +26,6 @@ app.use(router)
 
 app.component('Tree', Tree);
 app.component('Button', Button);
+app.component('Card', Card);
 
 app.mount('#app')

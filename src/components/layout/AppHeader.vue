@@ -1,5 +1,5 @@
 <template>
-  <nav class="border-b border-b-secondary">
+  <nav class="border-b border-b-secondary mb-12">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between gap-3 h-20">
       <div class="lg:me-12 flex items-center gap-1.5">
         <router-link

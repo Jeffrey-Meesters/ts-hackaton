@@ -5,16 +5,106 @@ export const docs: TypeScriptDocs = {
     name: 'Declaration Merging',
     description: 'Combining multiple declarations into a single definition.',
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: 'interface Box { height: number; width: number; }\ninterface Box { scale: number; }\nlet box: Box = { height: 5, width: 6, scale: 10 };',
+    subTopics: [
+      {
+        name: 'Interface Merging',
+        tags: ['interfaces', 'typescript'],
+        description:
+          'Demonstrates how multiple interface declarations with the same name are merged into a single interface.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Interface Merging',
+            description:
+              'Two interfaces with the same name are combined into one.',
+            code: "interface User { name: string; }\ninterface User { age: number; }\nlet user: User = { name: 'Alice', age: 30 };",
+          },
+        ],
+      },
+      {
+        name: 'Module Augmentation',
+        tags: ['modules', 'augmentation'],
+        description:
+          'Shows how to add new fields to existing modules using declaration merging.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Extending Module Configurations',
+            description:
+              "Add new properties to a module's configuration interface.",
+            code: "declare module 'my-module' { export interface Config { setting: boolean; } }\ndeclare module 'my-module' { export interface Config { version: string; } }\nimport { Config } from 'my-module';\nlet config: Config = { setting: true, version: '1.0.0' };",
+          },
+        ],
+      },
+      {
+        name: 'Class Merging',
+        tags: ['classes', 'typescript'],
+        description:
+          'Explains how classes can also participate in declaration merging to extend class definitions.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class and Interface Merging',
+            description:
+              'A class and an interface with the same name are merged to extend class behavior.',
+            code: 'class Point { x: number; constructor(x: number) { this.x = x; } }\ninterface Point { y: number; }\nlet point: Point = { x: 10, y: 20 };',
+          },
+        ],
+      },
+    ],
   },
   jsx: {
     name: 'JSX',
     description:
       "TypeScript's support for JSX, a syntax extension for JavaScript.",
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: '<div>Hello, world!</div>',
+    subTopics: [
+      {
+        name: 'Basic JSX Usage',
+        tags: ['jsx', 'typescript', 'react'],
+        description:
+          'Introduction to using JSX syntax in TypeScript with React.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Simple JSX Element',
+            description: 'Creating a basic JSX element in a TypeScript file.',
+            code: 'const element = <h1>Hello, world!</h1>;',
+          },
+        ],
+      },
+      {
+        name: 'Type Checking in JSX',
+        tags: ['jsx', 'typescript', 'type-checking'],
+        description:
+          'Explains how TypeScript performs type checking on JSX elements.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'JSX with Props Type Checking',
+            description:
+              'TypeScript checks the types of props passed to JSX components.',
+            code: 'interface GreetingProps { name: string; }\nconst Greeting: React.FC<GreetingProps> = ({ name }) => <h1>Hello, {name}!</h1>;\n<Greeting name="Alice" />;',
+          },
+        ],
+      },
+      {
+        name: 'JSX in TypeScript Projects',
+        tags: ['jsx', 'typescript', 'project-setup'],
+        description: 'Setting up a TypeScript project to support JSX.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Configuring tsconfig.json for JSX',
+            description:
+              'Modify the TypeScript configuration to support JSX syntax.',
+            code: '{\n  "compilerOptions": {\n    "jsx": "react",\n    "allowJs": true,\n    "checkJs": false\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   namespaces: {
     name: 'Namespaces',

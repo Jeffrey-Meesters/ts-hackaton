@@ -11,6 +11,7 @@ import type {
   TopicTree,
   Example,
   CardItem,
+  SearchItem,
 } from '@/types/DataModel'
 
 export const useDataStore = defineStore('dataStore', () => {
@@ -19,7 +20,7 @@ export const useDataStore = defineStore('dataStore', () => {
   const selectedSubtopic = ref<number | undefined>()
 
   const activeData = computed((): Topic | SubTopic | null => {
-    if (selectedTopic.value && selectedSubtopic.value) {
+    if (selectedTopic.value && typeof selectedSubtopic.value === 'number') {
       return documentation.value[selectedTopic.value].subTopics[
         selectedSubtopic.value
       ]
@@ -48,9 +49,18 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
-  // const searchList = computed((): Topic[] => {
-  //   searchList = [topicName: 'name', subtopics: [{subtopicname: 'name', tags: ['tag1', 'tag2']}]]
-  // })
+  const searchList = computed((): SearchItem[] => {
+    return Object.keys(documentation.value).map((topicName: string) => {
+      const topic = documentation.value[topicName]
+      return {
+        topicName: topic.name,
+        subtopics: topic.subTopics.map((subTopic: SubTopic) => ({
+          subTopicName: subTopic.name,
+          tags: subTopic.tags,
+        })),
+      }
+    })
+  })
 
   const cardList = computed((): CardItem[] => {
     return Object.keys(documentation.value).map(topic => {
@@ -58,7 +68,7 @@ export const useDataStore = defineStore('dataStore', () => {
       return subTopics.map((subTopic: SubTopic) => {
         return {
           name: subTopic.name,
-          code: subTopic.examples[0].code,
+          code: subTopic.examples[0] ? subTopic.examples[0].code : [],
           description: subTopic.description,
         }
       })
@@ -72,5 +82,6 @@ export const useDataStore = defineStore('dataStore', () => {
     activeData,
     topicTree,
     cardList,
+    searchList,
   }
 })
