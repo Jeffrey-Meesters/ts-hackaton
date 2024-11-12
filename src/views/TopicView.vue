@@ -11,7 +11,7 @@ import { storeToRefs } from 'pinia'
 import type { Topic } from '@/types/DataModel'
 import { computed } from 'vue'
 
-const { activeData } = storeToRefs(useDataStore())
+const { activeData, selectedTopic } = storeToRefs(useDataStore())
 const data = computed(() => activeData.value as Topic)
 </script>
 
@@ -33,7 +33,7 @@ const data = computed(() => activeData.value as Topic)
                 <AccordionContent>
                   <p class="m-0">{{ tab.description }}</p>
                   <div class="text-right">
-                    <router-link :to="{ path: '/enums/' + index }">
+                    <router-link :to="{ path: `${selectedTopic}/${index}` }">
                       <Button
                         icon="pi pi-link"
                         size="small"
