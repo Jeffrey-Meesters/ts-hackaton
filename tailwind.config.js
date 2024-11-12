@@ -5,6 +5,13 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require('tailwindcss-primeui')]
+  plugins: [require('tailwindcss-primeui')],
+  theme: {
+    colors: {
+      primary: '#3178C6',
+      accent: '#303036',
+      background: '#FFFAFF',
+    }
+  }
 }
 
