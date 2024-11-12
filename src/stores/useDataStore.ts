@@ -65,5 +65,6 @@ export const useDataStore = defineStore('dataStore', () => {
     selectedSubtopic,
     activeData,
     topicTree,
+    threeRandomTopics,
   }
 })
