@@ -6,6 +6,7 @@ import type { Ref } from 'vue'
 import type {
   TypeScriptDocs,
   Topic,
+  TopicKey,
   SubTopic,
   TopicTree,
   Example,
@@ -13,22 +14,14 @@ import type {
 
 export const useDataStore = defineStore('dataStore', () => {
   const documentation: Ref<TypeScriptDocs> = ref(docs)
-  const selectedTopic: Ref<string> = ref('')
-  const selectedSubtopic: Ref<string> = ref('')
+  const selectedTopic = ref<TopicKey | undefined>()
+  const selectedSubtopic = ref<number | undefined>()
 
   const activeData = computed((): Topic | SubTopic | null => {
-    if (selectedSubtopic.value) {
-      const topicKeys = Object.keys(documentation.value)
-      for (const key of topicKeys) {
-        const topic: Topic = documentation.value[key]
-        const subTopic: SubTopic = topic.subTopics.find(
-          subTopic => subTopic.name === selectedSubtopic.value,
-        )
-        if (subTopic) {
-          return subTopic
-        }
-      }
-      return null
+    if (selectedTopic.value && selectedSubtopic.value) {
+      return documentation.value[selectedTopic.value].subTopics[
+        selectedSubtopic.value
+      ]
     }
     if (selectedTopic.value) {
       return documentation.value[selectedTopic.value]
