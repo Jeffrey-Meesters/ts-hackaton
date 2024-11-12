@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TopicTree from '@/components/topicTree/TopicTree.vue';
+import TopicCard from '@/components/topicCard/TopicCard.vue';
 import Search from '@/components/Search.vue';
 import Title from '@/components/home/Title.vue';
 </script>
@@ -10,6 +10,6 @@ import Title from '@/components/home/Title.vue';
     <div class="w-1/2 min-w-20 mt-20">
       <Search />
     </div>
-    <TopicTree />
+    <TopicCard />
   </section>
 </template>
