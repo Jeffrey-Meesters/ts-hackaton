@@ -5,8 +5,54 @@ export const docs: TypeScriptDocs = {
     name: 'Declaration Merging',
     description: 'Combining multiple declarations into a single definition.',
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: 'interface Box { height: number; width: number; }\ninterface Box { scale: number; }\nlet box: Box = { height: 5, width: 6, scale: 10 };',
+    subTopics: [
+      {
+        name: 'Interface Merging',
+        tags: ['interfaces', 'typescript'],
+        description:
+          'Demonstrates how multiple interface declarations with the same name are merged into a single interface.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Interface Merging',
+            description:
+              'Two interfaces with the same name are combined into one.',
+            code: "interface User { name: string; }\ninterface User { age: number; }\nlet user: User = { name: 'Alice', age: 30 };",
+          },
+        ],
+      },
+      {
+        name: 'Module Augmentation',
+        tags: ['modules', 'augmentation'],
+        description:
+          'Shows how to add new fields to existing modules using declaration merging.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Extending Module Configurations',
+            description:
+              "Add new properties to a module's configuration interface.",
+            code: "declare module 'my-module' { export interface Config { setting: boolean; } }\ndeclare module 'my-module' { export interface Config { version: string; } }\nimport { Config } from 'my-module';\nlet config: Config = { setting: true, version: '1.0.0' };",
+          },
+        ],
+      },
+      {
+        name: 'Class Merging',
+        tags: ['classes', 'typescript'],
+        description:
+          'Explains how classes can also participate in declaration merging to extend class definitions.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class and Interface Merging',
+            description:
+              'A class and an interface with the same name are merged to extend class behavior.',
+            code: 'class Point { x: number; constructor(x: number) { this.x = x; } }\ninterface Point { y: number; }\nlet point: Point = { x: 10, y: 20 };',
+          },
+        ],
+      },
+    ],
   },
   jsx: {
     name: 'JSX',
