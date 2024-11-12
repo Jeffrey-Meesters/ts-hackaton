@@ -32,7 +32,7 @@ const router = useRouter()
         <h2 class="mb-0">{{ data.name }}</h2>
       </template>
       <template #content>
-        <p>{{ data.description }}</p>
+        <p class="mb-4">{{ data.description }}</p>
         <div v-for="example in data.examples" :key="example.title">
           <CodeBlock :title="example.title" :code="example.code" />
         </div>
