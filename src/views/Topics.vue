@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TopicTree from '@/components/topicTree/TopicTree.vue';
+import TopicTree from '@/components/topicTree/TopicTree.vue'
 </script>
 
 <template>

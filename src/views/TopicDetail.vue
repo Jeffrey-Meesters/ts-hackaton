@@ -1,20 +1,32 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
-import CodeBlock from '@/components/detail/CodeBlock.vue';
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-import type { SubTopic } from '@/types/DataModel';
-import { useDataStore } from '@/stores/useDataStore';
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
+import CodeBlock from '@/components/detail/CodeBlock.vue'
+import Card from 'primevue/card'
+import Button from 'primevue/button'
+import type { SubTopic } from '@/types/DataModel'
+import { useDataStore } from '@/stores/useDataStore'
+import { useRouter } from 'vue-router'
 
-const { activeData } = storeToRefs(useDataStore());
-const data = computed(() => activeData.value as SubTopic);
+const { activeData, selectedTopic, selectedSubtopic, activeTopicSubtopicList } =
+  storeToRefs(useDataStore())
+const data = computed(() => activeData.value as SubTopic)
+const router = useRouter()
 </script>
 
 <template>
   <article class="w-3/4 mx-auto">
     <div class="mb-2">
-      <Button v-for="tag in data.tags" class="mr-2 !bg-[#303036] !text-white" :key="tag" :label="tag" severity="secondary" />
+      <Button
+        v-for="(name, index) in activeTopicSubtopicList"
+        class="mr-2 !bg-[#303036] !text-white !border-8"
+        :class="
+          index === selectedSubtopic ? '!border-green-500' : '!border-green-200'
+        "
+        :key="name"
+        :label="name"
+        @click="router.push({ path: `/${selectedTopic}/${index}` })"
+      />
     </div>
     <Card>
       <template #title>
