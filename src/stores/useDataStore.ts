@@ -50,10 +50,18 @@ export const useDataStore = defineStore('dataStore', () => {
     })
   })
 
-  // const searchList = computed((): SearchItem[] => {
-  //   return Object.keys(documentation.value).map((topicName: string) => {})
-  //   searchList = [topicName: 'name', subtopics: [{subtopicname: 'name', tags: ['tag1', 'tag2']}]]
-  // })
+  const searchList = computed((): SearchItem[] => {
+    return Object.keys(documentation.value).map((topicName: string) => {
+      const topic = documentation.value[topicName]
+      return {
+        topicName: topic.name,
+        subtopics: topic.subTopics.map((subTopic: SubTopic) => ({
+          subTopicName: subTopic.name,
+          tags: subTopic.tags,
+        })),
+      }
+    })
+  })
 
   const cardList = computed((): CardItem[] => {
     return Object.keys(documentation.value).map(topic => {
@@ -75,6 +83,6 @@ export const useDataStore = defineStore('dataStore', () => {
     activeData,
     topicTree,
     cardList,
-    // searchList,
+    searchList,
   }
 })

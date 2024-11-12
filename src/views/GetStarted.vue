@@ -7,6 +7,9 @@ import Card from 'primevue/card';
     <h1 class="mb-10">Get Started</h1>
     <div class="grid grid-cols-2 gap-6">
       <Card v-for="i of 4">
+        <template #title>
+          <h2>Card {{ i }}</h2>
+        </template>
         <template #content>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dignissimos, aliquam minima nisi provident expedita delectus facere, maiores, assumenda
           architecto iusto sequi totam perspiciatis sunt explicabo consectetur eveniet voluptas ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit.
