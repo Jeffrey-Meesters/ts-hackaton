@@ -68,34 +68,47 @@ const router = createRouter({
   ],
 })
 
+const updateSubtopic = (
+  to: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  const dataStore = useDataStore()
+  const topicKey = to.params.topic as TopicKey
+  const subTopicKey = +to.params.subTopic
+  const subtopics = dataStore?.documentation[topicKey]?.subTopics
+
+  if (typeof subTopicKey === 'number' && subtopics?.[subTopicKey]) {
+    dataStore.selectedSubtopic = subTopicKey
+    next()
+  } else {
+    next({ name: 'error' })
+  }
+}
+
+const updateTopic = (
+  to: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  const dataStore = useDataStore()
+  const topicKey = to.params.topic as TopicKey
+
+  if (topicKey && dataStore?.documentation[topicKey]) {
+    dataStore.selectedTopic = topicKey
+    dataStore.selectedSubtopic = undefined
+    next()
+  } else {
+    next({ name: 'error' })
+  }
+}
+
 export const beforeEachFn = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
-  const dataStore = useDataStore()
-
   // This is a guard to check if the topic exists in the documentation
-  if (to.name === 'topic' || to.name === 'detail') {
-    const topicKey = to.params.topic as TopicKey
-
-    if (topicKey && dataStore?.documentation[topicKey]) {
-      dataStore.selectedTopic = topicKey
-      const subtopics = dataStore?.documentation[topicKey]?.subTopics
-      const subTopicKey = +to.params.subTopic
-
-      if (to.name === 'detail') {
-        if (typeof subTopicKey === 'number' && subtopics?.[subTopicKey]) {
-          next()
-        } else {
-          next({ name: 'error' })
-        }
-      }
-      next()
-    } else {
-      next({ name: 'error' })
-    }
-  }
+  if (to.name === 'topic') return updateTopic(to, next)
+  if (to.name === 'detail') return updateSubtopic(to, next)
 
   next()
 }
