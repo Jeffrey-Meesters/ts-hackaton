@@ -9,7 +9,7 @@ type Example = {
 export type TopicTree = {
   key: string
   label: string
-  children?: TopicTree[]
+  children: TopicTree[]
 }
 
 export type SubTopic = {

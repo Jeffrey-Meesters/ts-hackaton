@@ -48,6 +48,7 @@ export const useDataStore = defineStore('dataStore', () => {
         children: topic.subTopics.map(subTopic => ({
           key: subTopic,
           label: subTopic.name,
+          description: subTopic.description,
           children: subTopic.examples.map(example => ({
             key: example,
             label: example.title,
