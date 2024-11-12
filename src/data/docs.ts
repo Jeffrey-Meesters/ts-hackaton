@@ -59,15 +59,99 @@ export const docs: TypeScriptDocs = {
     description:
       "TypeScript's support for JSX, a syntax extension for JavaScript.",
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: '<div>Hello, world!</div>',
+    subTopics: [
+      {
+        name: 'Basic JSX Usage',
+        tags: ['jsx', 'typescript', 'react'],
+        description:
+          'Introduction to using JSX syntax in TypeScript with React.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Simple JSX Element',
+            description: 'Creating a basic JSX element in a TypeScript file.',
+            code: 'const element = <h1>Hello, world!</h1>;',
+          },
+        ],
+      },
+      {
+        name: 'Type Checking in JSX',
+        tags: ['jsx', 'typescript', 'type-checking'],
+        description:
+          'Explains how TypeScript performs type checking on JSX elements.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'JSX with Props Type Checking',
+            description:
+              'TypeScript checks the types of props passed to JSX components.',
+            code: 'interface GreetingProps { name: string; }\nconst Greeting: React.FC<GreetingProps> = ({ name }) => <h1>Hello, {name}!</h1>;\n<Greeting name="Alice" />;',
+          },
+        ],
+      },
+      {
+        name: 'JSX in TypeScript Projects',
+        tags: ['jsx', 'typescript', 'project-setup'],
+        description: 'Setting up a TypeScript project to support JSX.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Configuring tsconfig.json for JSX',
+            description:
+              'Modify the TypeScript configuration to support JSX syntax.',
+            code: '{\n  "compilerOptions": {\n    "jsx": "react",\n    "allowJs": true,\n    "checkJs": false\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   namespaces: {
     name: 'Namespaces',
     description: 'Organize and manage code within a TypeScript application.',
     level: 'basic',
-    code: '',
-    subTopics: [],
+    code: 'namespace MyNamespace {\n  export const greet = () => "Hello, world!";\n}\nconsole.log(MyNamespace.greet());',
+    subTopics: [
+      {
+        name: 'Creating Namespaces',
+        tags: ['namespaces', 'typescript'],
+        description: 'Learn how to define and use namespaces in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Namespace Declaration',
+            description: 'Create a simple namespace to encapsulate code.',
+            code: 'namespace Utilities {\n  export function log(message: string) {\n    console.log(message);\n  }\n}\nUtilities.log("Logging a message");',
+          },
+        ],
+      },
+      {
+        name: 'Nested Namespaces',
+        tags: ['namespaces', 'typescript', 'nested'],
+        description: 'Explore how to nest namespaces within each other.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Nested Namespaces',
+            description: 'Define a namespace within another namespace.',
+            code: 'namespace Outer {\n  export namespace Inner {\n    export const name = "InnerNamespace";\n  }\n}\nconsole.log(Outer.Inner.name);',
+          },
+        ],
+      },
+      {
+        name: 'Merging Namespaces',
+        tags: ['namespaces', 'typescript', 'merging'],
+        description: 'Understand how to merge multiple namespace declarations.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Namespace Merging Example',
+            description: 'Merge two namespace declarations into one.',
+            code: 'namespace Shapes {\n  export function square(x: number) { return x * x; }\n}\nnamespace Shapes {\n  export function circle(r: number) { return Math.PI * r * r; }\n}\nconsole.log(Shapes.square(2), Shapes.circle(3));',
+          },
+        ],
+      },
+    ],
   },
   namespacesAndModules: {
     name: 'Namespaces and Modules',
@@ -75,35 +159,299 @@ export const docs: TypeScriptDocs = {
       'Understand the differences and use cases of namespaces and modules.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Namespaces vs. Modules',
+        tags: ['namespaces', 'modules', 'typescript'],
+        description:
+          'Learn the key differences between namespaces and modules in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Comparison',
+            description:
+              'A simple example illustrating the difference between namespaces and modules.',
+            code: '// Namespace example\nnamespace Utilities {\n  export function log(message: string) {\n    console.log(message);\n  }\n}\nUtilities.log("Namespace logging");\n\n// Module example\n// utilities.ts\nexport function log(message: string) {\n  console.log(message);\n}\n// usage in another file\n// import { log } from "./utilities";\n// log("Module logging");',
+          },
+        ],
+      },
+      {
+        name: 'When to Use Namespaces',
+        tags: ['namespaces', 'typescript'],
+        description: 'Understand scenarios where namespaces are beneficial.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Namespaces for Internal Modules',
+            description:
+              'Namespaces are ideal for organizing code in internal libraries.',
+            code: 'namespace InternalLibrary {\n  export function internalFunction() {\n    console.log("Internal function");\n  }\n}\nInternalLibrary.internalFunction();',
+          },
+        ],
+      },
+      {
+        name: 'When to Use Modules',
+        tags: ['modules', 'typescript'],
+        description: 'Learn when modules are preferred over namespaces.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Modules for External Libraries',
+            description:
+              'Modules are used for creating and consuming external libraries.',
+            code: '// math.ts\nexport function add(x: number, y: number): number {\n  return x + y;\n}\n// usage in another file\n// import { add } from "./math";\n// console.log(add(2, 3));',
+          },
+        ],
+      },
+    ],
   },
   symbols: {
     name: 'Symbols',
     description: 'A primitive data type for unique identifiers.',
     level: 'advanced',
-    code: '',
-    subTopics: [],
+    code: 'const uniqueSymbol = Symbol("unique");',
+    subTopics: [
+      {
+        name: 'Creating Symbols',
+        tags: ['symbols', 'unique identifiers', 'typescript'],
+        description:
+          'Learn how to create and use symbols as unique identifiers.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Symbol Creation',
+            description: 'Create a new symbol using the Symbol function.',
+            code: 'const mySymbol = Symbol("description");\nconsole.log(typeof mySymbol); // "symbol"',
+          },
+        ],
+      },
+      {
+        name: 'Symbols as Object Keys',
+        tags: ['symbols', 'object keys', 'typescript'],
+        description:
+          'Use symbols as keys in objects for unique property identifiers.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Symbols for Object Properties',
+            description:
+              'Demonstrates how symbols can be used as object property keys.',
+            code: 'const symKey = Symbol("key");\nconst obj = { [symKey]: "value" };\nconsole.log(obj[symKey]); // "value"',
+          },
+        ],
+      },
+      {
+        name: 'Global Symbols',
+        tags: ['symbols', 'global registry', 'typescript'],
+        description:
+          'Understand how to use the global symbol registry for shared symbols.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Shared Symbols with Symbol.for',
+            description:
+              'Use Symbol.for to create or retrieve symbols from the global registry.',
+            code: 'const globalSym = Symbol.for("shared");\nconst sameGlobalSym = Symbol.for("shared");\nconsole.log(globalSym === sameGlobalSym); // true',
+          },
+        ],
+      },
+      {
+        name: 'Well-Known Symbols',
+        tags: ['symbols', 'well-known symbols', 'typescript'],
+        description:
+          'Explore well-known symbols that are built into JavaScript.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Using Well-Known Symbols',
+            description:
+              'Example of using Symbol.iterator to make an object iterable.',
+            code: 'const iterableObj = {\n  [Symbol.iterator]: function* () {\n    yield 1;\n    yield 2;\n    yield 3;\n  }\n};\nfor (const value of iterableObj) {\n  console.log(value); // 1, 2, 3\n}',
+          },
+        ],
+      },
+    ],
   },
   tripeSlashDirectives: {
     name: 'Triple-Slash Directives',
     description: 'Special comments for compiler directives.',
     level: 'basic',
-    code: '',
-    subTopics: [],
+    code: '/// <reference path="..." />',
+    subTopics: [
+      {
+        name: 'Reference Directives',
+        tags: ['triple-slash', 'typescript', 'reference'],
+        description:
+          'Learn how to use triple-slash reference directives to include files.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Reference Directive',
+            description:
+              'Use a triple-slash directive to include a reference to another file.',
+            code: '/// <reference path="helper.ts" />\nconsole.log("This file references helper.ts");',
+          },
+        ],
+      },
+      {
+        name: 'Types Reference Directive',
+        tags: ['triple-slash', 'typescript', 'types'],
+        description:
+          'Use types reference directive to include declaration files.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Including Type Declarations',
+            description:
+              'Include type declarations from DefinitelyTyped packages.',
+            code: '/// <reference types="node" />\nimport * as fs from "fs";\nconsole.log("Node.js types included");',
+          },
+        ],
+      },
+      {
+        name: 'No-Default-Lib Directive',
+        tags: ['triple-slash', 'typescript', 'no-default-lib'],
+        description: 'Exclude the default library files from the compilation.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Excluding Default Libraries',
+            description:
+              'Use the no-default-lib directive to exclude default libraries.',
+            code: '/// <reference no-default-lib="true"/>\nconsole.log("Default libraries excluded");',
+          },
+        ],
+      },
+    ],
   },
   typeCompatibility: {
     name: 'Type Compatibility',
     description: 'Determines if one type is assignable to another.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Structural Typing',
+        tags: ['type compatibility', 'typescript', 'structural typing'],
+        description:
+          'Understand how TypeScript uses structural typing to determine compatibility.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Structural Typing',
+            description:
+              'Illustrates how objects with the same shape are compatible.',
+            code: 'interface Point { x: number; y: number; }\nlet p: Point = { x: 10, y: 20 };\nlet q = { x: 10, y: 20, z: 30 };\np = q; // OK, because q has at least x and y',
+          },
+        ],
+      },
+      {
+        name: 'Function Compatibility',
+        tags: ['type compatibility', 'typescript', 'functions'],
+        description:
+          'How functions are compared based on their parameter and return types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Function Parameter Compatibility',
+            description:
+              'Examples of how function parameters affect compatibility.',
+            code: 'let func1 = (a: number) => a;\nlet func2 = (b: number, c: string) => b;\nfunc1 = func2; // Error: func2 has more parameters\nfunc2 = func1; // OK: func1 can be called with fewer parameters',
+          },
+        ],
+      },
+      {
+        name: 'Enum Compatibility',
+        tags: ['type compatibility', 'typescript', 'enums'],
+        description:
+          'Understand how enum types are compatible with numeric values.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Enum and Number Compatibility',
+            description: 'Shows compatibility between enums and numbers.',
+            code: 'enum Status { Ready, Waiting };\nlet num: number = Status.Ready;\nlet status: Status = 1; // OK, because enums are compatible with numbers',
+          },
+        ],
+      },
+      {
+        name: 'Class Compatibility',
+        tags: ['type compatibility', 'typescript', 'classes'],
+        description:
+          'Explains how classes are compatible based on their structure.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class Structural Compatibility',
+            description:
+              'Two classes are compatible if they have the same members.',
+            code: 'class Animal {\n  feet: number;\n  constructor(name: string, numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nclass Size {\n  feet: number;\n  constructor(numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nlet a: Animal = new Size(4); // OK, because Size has at least feet',
+          },
+        ],
+      },
+    ],
   },
   variableDeclaration: {
     name: 'Variable Declaration',
     description: 'Syntax and rules for declaring variables in TypeScript.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'let and const',
+        tags: ['variable declaration', 'typescript', 'let', 'const'],
+        description:
+          'Learn the differences between let and const for variable declarations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using let and const',
+            description: 'Examples of declaring variables using let and const.',
+            code: 'let count = 0;\ncount = 1; // OK\nconst name = "Alice";\n// name = "Bob"; // Error: Assignment to constant variable.',
+          },
+        ],
+      },
+      {
+        name: 'Type Annotations',
+        tags: ['variable declaration', 'typescript', 'type annotations'],
+        description: 'Specify types for variables using type annotations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Declaring Variables with Type Annotations',
+            description: 'Add type annotations to variable declarations.',
+            code: 'let isDone: boolean = false;\nlet age: number = 25;\nlet username: string = "Alice";',
+          },
+        ],
+      },
+      {
+        name: 'Variable Scope',
+        tags: ['variable declaration', 'typescript', 'scope'],
+        description: 'Understand the scoping rules for var, let, and const.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Scoping with var, let, and const',
+            description: 'Differences in scoping with var, let, and const.',
+            code: 'if (true) {\n  var x = 10;\n  let y = 20;\n  const z = 30;\n}\nconsole.log(x); // 10\n// console.log(y); // Error: y is not defined\n// console.log(z); // Error: z is not defined',
+          },
+        ],
+      },
+      {
+        name: 'Destructuring Assignment',
+        tags: ['variable declaration', 'typescript', 'destructuring'],
+        description:
+          'Use destructuring to extract values from arrays and objects.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Array and Object Destructuring',
+            description: 'Examples of destructuring arrays and objects.',
+            code: 'let [a, b] = [1, 2];\nconsole.log(a, b); // 1, 2\nlet { name, age } = { name: "Alice", age: 25 };\nconsole.log(name, age); // Alice, 25',
+          },
+        ],
+      },
+    ],
   },
   narrowing: {
     name: 'Type Narrowing',

@@ -75,3 +75,6 @@ export type TypeScriptDocs = {
 }
 
 export type TopicKey = keyof TypeScriptDocs
+export type PartialTypeScriptDocs = Partial<TypeScriptDocs>;
+
+ 
