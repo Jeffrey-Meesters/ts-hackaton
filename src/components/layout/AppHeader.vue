@@ -34,6 +34,11 @@
           Download
         </router-link>
       </div>
+      <HeaderSearch/>
     </div>
   </nav>
 </template>
+
+<script setup lang="ts">
+import HeaderSearch from '@/components/HeaderSearch.vue'
+</script>

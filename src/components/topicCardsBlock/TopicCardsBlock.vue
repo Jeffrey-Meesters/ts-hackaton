@@ -22,8 +22,12 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-row">
-    <div v-for="cardDetail in cardDetails" :key="cardDetail.name" class="h-full">
-      <TopicCard :name="cardDetail.name" :code="cardDetail.code" :description="cardDetail.description" />
+    <div  class="bg-blue" v-for="cardDetail in cardDetails" :key="cardDetail.name">
+      <TopicCard
+        :name="cardDetail.name"
+        :code="cardDetail.code"
+        :description="cardDetail.description"
+      />
     </div>
   </div>
 </template>
