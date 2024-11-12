@@ -3,6 +3,10 @@ import CodeBlock from '@/components/detail/CodeBlock.vue'
 import pageLayout from '@/components/pageLayout.vue'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
+import Accordion from 'primevue/accordion'
+import AccordionPanel from 'primevue/accordionpanel'
+import AccordionHeader from 'primevue/accordionheader'
+import AccordionContent from 'primevue/accordioncontent'
 
 // import { useDataStore } from '@/stores/useDataStore'
 // const dataStore = useDataStore()
@@ -54,6 +58,18 @@ const data = {
             </div>
           </template>
         </Card>
+        <Accordion value="0" class="mt-8">
+          <AccordionPanel
+            v-for="tab in data.subTopics"
+            :key="tab.name"
+            :value="tab.name"
+          >
+            <AccordionHeader>{{ tab.name }}</AccordionHeader>
+            <AccordionContent>
+              <p class="m-0">{{ tab.description }}</p>
+            </AccordionContent>
+          </AccordionPanel>
+        </Accordion>
       </article>
     </template>
   </pageLayout>
