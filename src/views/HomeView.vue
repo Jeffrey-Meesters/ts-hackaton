@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TopicTree from '@/components/topicTree/TopicTree.vue';
 import Search from '@/components/Search.vue';
 import Title from '@/components/home/Title.vue';
 </script>
@@ -10,6 +9,5 @@ import Title from '@/components/home/Title.vue';
       <Title class="md:max-w-4xl" />
       <Search class="my-20 min-w-20 max-w-[40rem]" />
     </div>
-    <TopicTree class="mt-10" />
   </section>
 </template>
