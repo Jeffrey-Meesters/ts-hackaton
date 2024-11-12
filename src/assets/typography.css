@@ -1,13 +1,22 @@
+
+body {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
 h1 {
   @apply font-bold text-3xl mb-2 tracking-tight;
+  letter-spacing: 2px;
 }
 
 h2 {
   @apply font-semibold text-2xl mb-1;
+  letter-spacing: 2px;
 }
 
 h3 {
   @apply font-semibold text-xl mb-2;
+  letter-spacing: 2px;
 }
 
 .emphasized-text {
