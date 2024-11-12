@@ -15,7 +15,6 @@ const data = computed(() => activeData.value as SubTopic)
 <template>
   <pageLayout :name="data.name">
     <template #content>
-      {{ data }}
       <article class="w-3/4 mx-auto">
         <div class="mb-2">
           <Button class="mr-2" label="First example" severity="secondary" />
