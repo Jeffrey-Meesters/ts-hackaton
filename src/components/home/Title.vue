@@ -7,13 +7,13 @@
         For and by the ABN community
       </span>
     </div>
-    <h1 class="text-5xl font-medium tracking-tight text-gray-900 sm:text-7xl">Your personal TypeScript <strong>cheat-sheet</strong></h1>
+    <h1 class="text-5xl font-medium tracking-tight text-[#303036] sm:text-7xl">Your personal TypeScript <strong class="text-black">cheat-sheet</strong></h1>
     <div class="mt-6 text-lg tracking-tight text-gray-600 text-balance">
       Learn TypeScript with our interactive cheat-sheet. Get started with TypeScript and learn the basics in minutes.
     </div>
     <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 justify-center">
       <router-link
-        class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:cursor-not-allowed aria-disabled:opacity-75 flex-shrink-0 font-medium rounded-full text-base gap-x-3 px-6 py-3 shadow-sm text-white bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 aria-disabled:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 inline-flex items-center"
+        class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:cursor-not-allowed aria-disabled:opacity-75 flex-shrink-0 font-medium rounded-full text-base gap-x-3 px-6 py-3 shadow-sm !bg-[#303036] !text-white hover:bg-gray-800 disabled:bg-gray-900 aria-disabled:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 inline-flex items-center"
         to="/getStarted"
       >
         Get started

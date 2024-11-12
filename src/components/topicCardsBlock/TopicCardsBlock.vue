@@ -14,9 +14,7 @@ function getRandomCards(cards: CardItem[], count: number): CardItem[] {
 }
 
 onMounted(() => {
-  const flattenedCards = cardList.value
-    .filter(array => array.length > 0)
-    .flat();
+  const flattenedCards = cardList.value.filter((array) => array.length > 0).flat();
 
   cardDetails.value = getRandomCards(flattenedCards, 3);
 });
@@ -24,12 +22,8 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-row">
-    <div v-for="cardDetail in cardDetails" :key="cardDetail.name">
-      <TopicCard
-        :name="cardDetail.name"
-        :code="cardDetail.code"
-        :description="cardDetail.description"
-      />
+    <div v-for="cardDetail in cardDetails" :key="cardDetail.name" class="h-full">
+      <TopicCard :name="cardDetail.name" :code="cardDetail.code" :description="cardDetail.description" />
     </div>
   </div>
 </template>
