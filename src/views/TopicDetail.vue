@@ -19,12 +19,11 @@ const router = useRouter()
     <div class="mb-2">
       <Button
         v-for="(name, index) in activeTopicSubtopicList"
-        class="mr-2 !bg-[#303036] !text-white !border-8"
-        :class="
-          index === selectedSubtopic ? '!border-green-500' : '!border-green-200'
-        "
+        class="mr-2 !bg-[#303036] !text-white !border-0"
+        :class="index === selectedSubtopic ? '!bg-green-500' : ''"
         :key="name"
         :label="name"
+        size="small"
         @click="router.push({ path: `/${selectedTopic}/${index}` })"
       />
     </div>
