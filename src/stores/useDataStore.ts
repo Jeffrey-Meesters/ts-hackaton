@@ -31,6 +31,17 @@ export const useDataStore = defineStore('dataStore', () => {
     return null
   })
 
+  const activeTopicSubtopicList = computed((): string[] => {
+    if (selectedTopic.value) {
+      return documentation.value[selectedTopic.value].subTopics.map(
+        subTopic => {
+          return subTopic.name
+        },
+      )
+    }
+    return []
+  })
+
   const topicTree = computed((): TopicTree[] => {
     return Object.keys(documentation.value).map((key: string) => {
       const topic: Topic = documentation.value[key]
@@ -83,5 +94,6 @@ export const useDataStore = defineStore('dataStore', () => {
     topicTree,
     cardList,
     searchList,
+    activeTopicSubtopicList,
   }
 })

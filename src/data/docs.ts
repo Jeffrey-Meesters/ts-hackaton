@@ -329,21 +329,192 @@ export const docs: TypeScriptDocs = {
     description: 'Determines if one type is assignable to another.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Structural Typing',
+        tags: ['type compatibility', 'typescript', 'structural typing'],
+        description:
+          'Understand how TypeScript uses structural typing to determine compatibility.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Structural Typing',
+            description:
+              'Illustrates how objects with the same shape are compatible.',
+            code: 'interface Point { x: number; y: number; }\nlet p: Point = { x: 10, y: 20 };\nlet q = { x: 10, y: 20, z: 30 };\np = q; // OK, because q has at least x and y',
+          },
+        ],
+      },
+      {
+        name: 'Function Compatibility',
+        tags: ['type compatibility', 'typescript', 'functions'],
+        description:
+          'How functions are compared based on their parameter and return types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Function Parameter Compatibility',
+            description:
+              'Examples of how function parameters affect compatibility.',
+            code: 'let func1 = (a: number) => a;\nlet func2 = (b: number, c: string) => b;\nfunc1 = func2; // Error: func2 has more parameters\nfunc2 = func1; // OK: func1 can be called with fewer parameters',
+          },
+        ],
+      },
+      {
+        name: 'Enum Compatibility',
+        tags: ['type compatibility', 'typescript', 'enums'],
+        description:
+          'Understand how enum types are compatible with numeric values.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Enum and Number Compatibility',
+            description: 'Shows compatibility between enums and numbers.',
+            code: 'enum Status { Ready, Waiting };\nlet num: number = Status.Ready;\nlet status: Status = 1; // OK, because enums are compatible with numbers',
+          },
+        ],
+      },
+      {
+        name: 'Class Compatibility',
+        tags: ['type compatibility', 'typescript', 'classes'],
+        description:
+          'Explains how classes are compatible based on their structure.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class Structural Compatibility',
+            description:
+              'Two classes are compatible if they have the same members.',
+            code: 'class Animal {\n  feet: number;\n  constructor(name: string, numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nclass Size {\n  feet: number;\n  constructor(numFeet: number) {\n    this.feet = numFeet;\n  }\n}\nlet a: Animal = new Size(4); // OK, because Size has at least feet',
+          },
+        ],
+      },
+    ],
   },
   variableDeclaration: {
     name: 'Variable Declaration',
     description: 'Syntax and rules for declaring variables in TypeScript.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'let and const',
+        tags: ['variable declaration', 'typescript', 'let', 'const'],
+        description:
+          'Learn the differences between let and const for variable declarations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using let and const',
+            description: 'Examples of declaring variables using let and const.',
+            code: 'let count = 0;\ncount = 1; // OK\nconst name = "Alice";\n// name = "Bob"; // Error: Assignment to constant variable.',
+          },
+        ],
+      },
+      {
+        name: 'Type Annotations',
+        tags: ['variable declaration', 'typescript', 'type annotations'],
+        description: 'Specify types for variables using type annotations.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Declaring Variables with Type Annotations',
+            description: 'Add type annotations to variable declarations.',
+            code: 'let isDone: boolean = false;\nlet age: number = 25;\nlet username: string = "Alice";',
+          },
+        ],
+      },
+      {
+        name: 'Variable Scope',
+        tags: ['variable declaration', 'typescript', 'scope'],
+        description: 'Understand the scoping rules for var, let, and const.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Scoping with var, let, and const',
+            description: 'Differences in scoping with var, let, and const.',
+            code: 'if (true) {\n  var x = 10;\n  let y = 20;\n  const z = 30;\n}\nconsole.log(x); // 10\n// console.log(y); // Error: y is not defined\n// console.log(z); // Error: z is not defined',
+          },
+        ],
+      },
+      {
+        name: 'Destructuring Assignment',
+        tags: ['variable declaration', 'typescript', 'destructuring'],
+        description:
+          'Use destructuring to extract values from arrays and objects.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Array and Object Destructuring',
+            description: 'Examples of destructuring arrays and objects.',
+            code: 'let [a, b] = [1, 2];\nconsole.log(a, b); // 1, 2\nlet { name, age } = { name: "Alice", age: 25 };\nconsole.log(name, age); // Alice, 25',
+          },
+        ],
+      },
+    ],
   },
   narrowing: {
     name: 'Type Narrowing',
     description: 'Refine types through control flow analysis.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Type Guards',
+        tags: ['type narrowing', 'typescript', 'type guards'],
+        description: 'Use type guards to narrow types in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using typeof for Type Guards',
+            description: 'Narrow types using the typeof operator.',
+            code: 'function printId(id: string | number) {\n  if (typeof id === "string") {\n    console.log("String ID:", id.toUpperCase());\n  } else {\n    console.log("Number ID:", id.toFixed(2));\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'Instanceof Type Guard',
+        tags: ['type narrowing', 'typescript', 'instanceof'],
+        description: 'Use instanceof to narrow down object types.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using instanceof for Type Guards',
+            description: 'Narrow types using the instanceof operator.',
+            code: 'class Cat { meow() {} }\nclass Dog { bark() {} }\nfunction makeNoise(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'In Operator',
+        tags: ['type narrowing', 'typescript', 'in operator'],
+        description: 'Use the in operator to check for properties in objects.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using in for Type Guards',
+            description:
+              'Narrow types by checking for the existence of a property.',
+            code: 'type Fish = { swim: () => void };\ntype Bird = { fly: () => void };\nfunction move(animal: Fish | Bird) {\n  if ("swim" in animal) {\n    animal.swim();\n  } else {\n    animal.fly();\n  }\n}',
+          },
+        ],
+      },
+      {
+        name: 'Control Flow Analysis',
+        tags: ['type narrowing', 'typescript', 'control flow'],
+        description:
+          'Understand how TypeScript uses control flow analysis to narrow types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Control Flow Based Type Narrowing',
+            description:
+              'TypeScript automatically narrows types based on control flow.',
+            code: 'function example(x: string | null) {\n  if (x === null) {\n    console.log("x is null");\n  } else {\n    console.log("x is a string:", x);\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   objectTypes: {
     name: 'Object Types',
