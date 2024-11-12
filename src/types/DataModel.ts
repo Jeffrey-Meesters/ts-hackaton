@@ -1,6 +1,7 @@
 type Level = 'basic' | 'advanced' | 'expert'
 
 export type CardItem = {
+  parentName: string
   name: string
   code: string
   description: string
@@ -75,6 +76,4 @@ export type TypeScriptDocs = {
 }
 
 export type TopicKey = keyof TypeScriptDocs
-export type PartialTypeScriptDocs = Partial<TypeScriptDocs>;
-
- 
+export type PartialTypeScriptDocs = Partial<TypeScriptDocs>

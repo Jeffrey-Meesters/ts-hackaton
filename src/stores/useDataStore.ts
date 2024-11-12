@@ -78,6 +78,7 @@ export const useDataStore = defineStore('dataStore', () => {
       const subTopics = documentation.value[topic].subTopics
       return subTopics.map((subTopic: SubTopic) => {
         return {
+          parentName: topic,
           name: subTopic.name,
           code: subTopic.examples[0] ? subTopic.examples[0].code : [],
           description: subTopic.description,

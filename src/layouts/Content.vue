@@ -15,7 +15,7 @@ const { activeData } = storeToRefs(useDataStore());
         <h1 class="text-5xl mb-0 text-white">{{ activeData?.name }}</h1>
       </div>
     </div>
-    <main>
+    <main class="min-h-[50vh]">
       <slot />
     </main>
   </div>
