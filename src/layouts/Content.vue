@@ -2,7 +2,7 @@
 import AppHeader from '@/components/layout/AppHeader.vue'
 import { useDataStore } from '@/stores/useDataStore'
 import { storeToRefs } from 'pinia'
-const { selectedTopic } = storeToRefs(useDataStore())
+const { selectedTopicName } = storeToRefs(useDataStore())
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const { selectedTopic } = storeToRefs(useDataStore())
     </header>
     <div class="-mt-12">
       <div class="h-[12vh] mb-12 flex justify-center items-center bg-[#3178C6]">
-        <h1 class="text-5xl mb-0 text-white">{{ selectedTopic }}</h1>
+        <h1 class="text-5xl mb-0 text-white">{{ selectedTopicName }}</h1>
       </div>
     </div>
     <main class="min-h-[50vh]">
