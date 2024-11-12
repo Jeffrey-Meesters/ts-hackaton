@@ -14,7 +14,7 @@
           @focus="showResults = true"
           type="search"
           id="default-search"
-          class="block w-full p-6 px-12 text-xl ps-10 text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 d"
+          class="block w-full p-6 px-12 text-xl ps-10 text-gray-900 border border-gray-300 rounded-full bg-slate-100 focus:ring-blue-500 focus:border-blue-500 d"
           placeholder="Search..."
           required
         />
