@@ -14,7 +14,7 @@ const data = computed(() => activeData.value as SubTopic);
 <template>
   <article class="w-3/4 mx-auto">
     <div class="mb-2">
-      <Button v-for="tag in data.tags" :key="tag" class="mr-2" :label="tag" severity="secondary" />
+      <Button v-for="tag in data.tags" class="mr-2 !bg-[#303036] !text-white" :key="tag" :label="tag" severity="secondary" />
       <Button label="Second example" severity="secondary" />
     </div>
     <Card>

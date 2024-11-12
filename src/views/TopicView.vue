@@ -27,7 +27,7 @@ const data = computed(() => activeData.value as Topic);
               <p class="m-0">{{ tab.description }}</p>
               <div class="text-right">
                 <router-link :to="{ path: `${selectedTopic}/${index}` }">
-                  <Button icon="pi pi-link" size="small" class="mt-2" label="Read Article" variant="text" severity="secondary" raised />
+                  <Button size="small" class="mt-2 !bg-[#303036] !text-white" label="Read Article" variant="text" severity="secondary" raised />
                 </router-link>
               </div>
             </AccordionContent>

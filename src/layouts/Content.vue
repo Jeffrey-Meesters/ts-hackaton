@@ -11,7 +11,7 @@ const { activeData } = storeToRefs(useDataStore());
       <AppHeader />
     </header>
     <div class="-mt-12">
-      <div class="h-[12vh] mb-12 flex justify-center items-center bg-primary">
+      <div class="h-[12vh] mb-12 flex justify-center items-center bg-[#3178C6]">
         <h1 class="text-5xl mb-0 text-white">{{ activeData?.name }}</h1>
       </div>
     </div>
