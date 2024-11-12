@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import { useDataStore } from '@/stores/useDataStore';
+import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const topic = route.params.topic;
 
-const data = dataStore.data[topic] || null;
+const { activeData } = storeToRefs(useDataStore());
 </script>
 
 <template>
   <div>
     <h1>Topic view</h1>
-    {{ data }}
+    {{ activeData }}
   </div>
 </template>

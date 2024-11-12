@@ -57,6 +57,9 @@ export const beforeEachFn = async (
 ) => {
   const dataStore = useDataStore()
 
+  if (to.name === 'home') return next()
+  if (to.name === 'error') return next()
+
   if (dataStore?.documentation[to.params.topic]) {
     next()
   } else {
