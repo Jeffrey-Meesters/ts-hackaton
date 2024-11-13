@@ -27,6 +27,7 @@ onMounted(() => {
         :name="cardDetail.name"
         :code="cardDetail.code"
         :description="cardDetail.description"
+        :parentName="cardDetail.parentName"
       />
     </div>
   </div>
