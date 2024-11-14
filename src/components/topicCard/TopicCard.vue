@@ -18,19 +18,17 @@ const onNodeClick = (topic: string, subTopic: string) => {
 };
 </script>
 <template>
-  <Card class="!h-full" pt:body="flex-1 flex flex-col" pt:content="flex-1">
+  <Card class="!h-full" pt:body="flex-1 flex flex-col" pt:content="flex-1 text-sm pb-4">
     <template #header>
-      <CodeBlock :code="code" />
+      <CodeBlock :code="code" height="250" class="min-h-[20rem]" :copyTab="false" />
     </template>
     <template #title>{{ name }}</template>
     <template #content>
-      <p class="m-0">
-        {{ description }}
-      </p>
+      {{ description }}
     </template>
     <template #footer>
       <div class="flex gap-4 mt-1">
-        <Button label="See Detail" class="w-full" @click="onNodeClick(parentName, '0')" />
+        <Button label="See Detail" class="w-full !bg-[#303036] !text-white !border-none" @click="onNodeClick(parentName, '0')" />
       </div>
     </template>
   </Card>
