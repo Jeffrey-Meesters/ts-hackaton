@@ -272,58 +272,6 @@ export const docs: TypeScriptDocs = {
       },
     ],
   },
-  tripeSlashDirectives: {
-    name: 'Triple-Slash Directives',
-    description: 'Special comments for compiler directives.',
-    level: 'basic',
-    code: '/// <reference path="..." />',
-    subTopics: [
-      {
-        name: 'Reference Directives',
-        tags: ['triple-slash', 'typescript', 'reference'],
-        description:
-          'Learn how to use triple-slash reference directives to include files.',
-        level: 'basic',
-        examples: [
-          {
-            title: 'Basic Reference Directive',
-            description:
-              'Use a triple-slash directive to include a reference to another file.',
-            code: '/// <reference path="helper.ts" />\nconsole.log("This file references helper.ts");',
-          },
-        ],
-      },
-      {
-        name: 'Types Reference Directive',
-        tags: ['triple-slash', 'typescript', 'types'],
-        description:
-          'Use types reference directive to include declaration files.',
-        level: 'basic',
-        examples: [
-          {
-            title: 'Including Type Declarations',
-            description:
-              'Include type declarations from DefinitelyTyped packages.',
-            code: '/// <reference types="node" />\nimport * as fs from "fs";\nconsole.log("Node.js types included");',
-          },
-        ],
-      },
-      {
-        name: 'No-Default-Lib Directive',
-        tags: ['triple-slash', 'typescript', 'no-default-lib'],
-        description: 'Exclude the default library files from the compilation.',
-        level: 'advanced',
-        examples: [
-          {
-            title: 'Excluding Default Libraries',
-            description:
-              'Use the no-default-lib directive to exclude default libraries.',
-            code: '/// <reference no-default-lib="true"/>\nconsole.log("Default libraries excluded");',
-          },
-        ],
-      },
-    ],
-  },
   typeCompatibility: {
     name: 'Type Compatibility',
     description: 'Determines if one type is assignable to another.',
@@ -719,14 +667,132 @@ export const docs: TypeScriptDocs = {
     description: 'Obtain the type of a value at runtime.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Basic Usage of Typeof',
+        tags: ['typeof', 'typescript', 'type operator'],
+        description:
+          'Learn how to use the typeof operator to get the type of a variable.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Typeof with Variables',
+            description:
+              'Use typeof to capture the type of a variable for later use.',
+            code: 'let count = 10;\ntype CountType = typeof count; // number\nconst increment: CountType = 1;',
+          },
+        ],
+      },
+      {
+        name: 'Typeof with Functions',
+        tags: ['typeof', 'typescript', 'functions'],
+        description: 'Use typeof to obtain the type of a function.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Getting Function Types with Typeof',
+            description: 'Capture the type of a function using typeof.',
+            code: 'function greet(name: string): string {\n  return `Hello, ${name}`;\n}\ntype GreetType = typeof greet;\nconst greetUser: GreetType = (name) => `Hi, ${name}`;',
+          },
+        ],
+      },
+      {
+        name: 'Combining Typeof with Keyof',
+        tags: ['typeof', 'typescript', 'keyof'],
+        description:
+          'Use typeof in combination with keyof to dynamically access types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Typeof and Keyof Together',
+            description:
+              'Combine typeof and keyof to create flexible type definitions.',
+            code: 'const user = {\n  id: 1,\n  name: "Alice",\n  age: 30\n};\ntype UserKeys = keyof typeof user; // "id" | "name" | "age"',
+          },
+        ],
+      },
+      {
+        name: 'Typeof in Contextual Typing',
+        tags: ['typeof', 'typescript', 'contextual typing'],
+        description: 'Leverage typeof for contextual typing scenarios.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Using Typeof for Contextual Typing',
+            description:
+              'Apply typeof in contexts where inferred types are used.',
+            code: 'const settings = {\n  theme: "dark",\n  layout: "grid"\n};\ntype Settings = typeof settings;\nconst newSettings: Settings = {\n  theme: "light",\n  layout: "list"\n};',
+          },
+        ],
+      },
+    ],
   },
   indexedAccessTypes: {
     name: 'Indexed Access Types',
     description: 'Access the type of a property by key.',
     level: 'advanced',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Basic Usage of Indexed Access Types',
+        tags: ['indexed access', 'typescript', 'type operator'],
+        description:
+          'Learn how to access a property type using indexed access types.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Accessing Property Types',
+            description:
+              'Use indexed access types to get the type of a specific property.',
+            code: 'interface User {\n  id: number;\n  name: string;\n  age: number;\n}\ntype UserNameType = User["name"]; // string',
+          },
+        ],
+      },
+      {
+        name: 'Nested Indexed Access Types',
+        tags: ['indexed access', 'typescript', 'nested types'],
+        description:
+          'Access types of nested properties using indexed access types.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Accessing Nested Property Types',
+            description:
+              'Use indexed access types to get the type of a nested property.',
+            code: 'interface Product {\n  details: {\n    manufacturer: string;\n    warranty: boolean;\n  };\n}\ntype ManufacturerType = Product["details"]["manufacturer"]; // string',
+          },
+        ],
+      },
+      {
+        name: 'Using Indexed Access in Generics',
+        tags: ['indexed access', 'typescript', 'generics'],
+        description:
+          'Utilize indexed access types within generic type definitions.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Generic Function with Indexed Access Types',
+            description:
+              'Create a generic function using indexed access types.',
+            code: 'function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\nconst user = { id: 1, name: "Alice" };\nconst userName = getProperty(user, "name"); // "Alice"',
+          },
+        ],
+      },
+      {
+        name: 'Combining Indexed Access with Mapped Types',
+        tags: ['indexed access', 'typescript', 'mapped types'],
+        description:
+          'Combine indexed access types with mapped types for advanced type transformations.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Using Indexed Access in Mapped Types',
+            description: 'Leverage indexed access types within mapped types.',
+            code: 'type User = {\n  id: number;\n  name: string;\n};\ntype ReadOnly<T> = {\n  readonly [P in keyof T]: T[P];\n};\ntype ReadOnlyUser = ReadOnly<User>; // { readonly id: number; readonly name: string; }',
+          },
+        ],
+      },
+    ],
   },
   conditionalTypes: {
     name: 'Conditional Types',
@@ -734,28 +800,262 @@ export const docs: TypeScriptDocs = {
       'Types that choose one of two possible types based on a condition.',
     level: 'expert',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Basic Conditional Types',
+        tags: ['conditional types', 'typescript', 'type operator'],
+        description:
+          'Learn the syntax and basic usage of conditional types in TypeScript.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Simple Conditional Type',
+            description: 'Define a type that resolves based on a condition.',
+            code: 'type IsString<T> = T extends string ? "Yes" : "No";\ntype Result = IsString<"Hello">; // "Yes"',
+          },
+        ],
+      },
+      {
+        name: 'Inferring Types with Conditional Types',
+        tags: ['conditional types', 'typescript', 'infer'],
+        description:
+          'Use conditional types to infer types in complex scenarios.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Inferring Type with Conditional Types',
+            description:
+              'Example of using infer keyword within a conditional type.',
+            code: 'type GetReturnType<T> = T extends (...args: any[]) => infer R ? R : never;\nfunction foo() { return 42; }\ntype ReturnTypeOfFoo = GetReturnType<typeof foo>; // number',
+          },
+        ],
+      },
+      {
+        name: 'Distributive Conditional Types',
+        tags: ['conditional types', 'typescript', 'distributive'],
+        description:
+          'Understand how conditional types distribute over union types.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Distributive Conditional Type Example',
+            description:
+              'Illustrates how conditional types apply to each member of a union.',
+            code: 'type ToArray<T> = T extends any ? T[] : never;\ntype StrArrOrNumArr = ToArray<string | number>; // string[] | number[]',
+          },
+        ],
+      },
+      {
+        name: 'Conditional Types with Mapped Types',
+        tags: ['conditional types', 'typescript', 'mapped types'],
+        description:
+          'Combine conditional types with mapped types for advanced type mapping.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Using Conditional Types in Mapped Types',
+            description: 'Apply conditional logic within a mapped type.',
+            code: 'type NullableProperties<T> = {\n  [K in keyof T]: null extends T[K] ? K : never;\n}[keyof T];\ninterface User {\n  id: number;\n  name: string | null;\n  age: number | null;\n}\ntype NullableKeys = NullableProperties<User>; // "name" | "age"',
+          },
+        ],
+      },
+    ],
   },
   templateLiteralTypes: {
     name: 'Template Literal Types',
     description: 'Build types using template literal syntax.',
     level: 'expert',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Basic Template Literal Types',
+        tags: ['template literal types', 'typescript', 'type syntax'],
+        description:
+          'Learn how to construct types using template literal syntax.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Simple Template Literal Type',
+            description:
+              'Create a basic template literal type by combining string literals.',
+            code: 'type Greeting = `Hello, ${string}`;\nlet greet: Greeting = "Hello, world"; // Valid',
+          },
+        ],
+      },
+      {
+        name: 'Inferring Types with Template Literals',
+        tags: ['template literal types', 'typescript', 'infer'],
+        description:
+          'Use template literal types to infer and manipulate string types.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Inferring Parts of a Template Literal',
+            description:
+              'Extract parts of a string type using template literals and inferring.',
+            code: 'type ExtractName<T> = T extends `Hello, ${infer U}` ? U : never;\ntype Name = ExtractName<"Hello, Alice">; // "Alice"',
+          },
+        ],
+      },
+      {
+        name: 'Combining with Union and Intersection Types',
+        tags: ['template literal types', 'typescript', 'union', 'intersection'],
+        description:
+          'Combine template literal types with union and intersection types for complex type definitions.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Union and Intersection with Template Literals',
+            description:
+              'Create complex types by combining template literals with unions and intersections.',
+            code: 'type Color = "red" | "green" | "blue";\ntype Brightness = "light" | "dark";\ntype ColorTheme = `${Brightness}-${Color}`;\nlet theme: ColorTheme = "light-red"; // Valid',
+          },
+        ],
+      },
+      {
+        name: 'Using Template Literals in Mapped Types',
+        tags: ['template literal types', 'typescript', 'mapped types'],
+        description:
+          'Leverage template literal types within mapped types for dynamic key creation.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Dynamic Keys with Template Literals in Mapped Types',
+            description:
+              'Use template literals to dynamically create keys in a mapped type.',
+            code: 'type Person = {\n  name: string;\n  age: number;\n};\ntype PersonActions = {\n  [K in keyof Person as `set${Capitalize<string & K>}`]: (value: Person[K]) => void;\n};\n// Results in: { setName: (value: string) => void; setAge: (value: number) => void; }',
+          },
+        ],
+      },
+    ],
   },
   classes: {
     name: 'Classes',
     description: 'Define blueprints for creating objects.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Class Declaration',
+        tags: ['classes', 'typescript', 'declaration'],
+        description: 'Learn how to declare a class in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Class Declaration',
+            description: 'Create a simple class with properties and methods.',
+            code: 'class Animal {\n  name: string;\n  constructor(name: string) {\n    this.name = name;\n  }\n  move(distance: number) {\n    console.log(`${this.name} moved ${distance} meters.`);\n  }\n}\nconst cat = new Animal("Cat");\ncat.move(10);',
+          },
+        ],
+      },
+      {
+        name: 'Inheritance',
+        tags: ['classes', 'typescript', 'inheritance'],
+        description: 'Understand how to extend classes using inheritance.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Class Inheritance',
+            description: 'Create a subclass that inherits from a parent class.',
+            code: 'class Bird extends Animal {\n  fly(distance: number) {\n    console.log(`${this.name} flew ${distance} meters.`);\n  }\n}\nconst sparrow = new Bird("Sparrow");\nsparrow.move(5);\nsparrow.fly(15);',
+          },
+        ],
+      },
+      {
+        name: 'Access Modifiers',
+        tags: ['classes', 'typescript', 'access modifiers'],
+        description:
+          'Learn about public, private, and protected access modifiers in classes.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Using Access Modifiers',
+            description:
+              'Control access to properties and methods using access modifiers.',
+            code: 'class Person {\n  public name: string;\n  private age: number;\n  protected gender: string;\n  constructor(name: string, age: number, gender: string) {\n    this.name = name;\n    this.age = age;\n    this.gender = gender;\n  }\n}\nconst john = new Person("John", 30, "male");\nconsole.log(john.name); // Accessible\n// console.log(john.age); // Error: Property \'age\' is private\n// console.log(john.gender); // Error: Property \'gender\' is protected',
+          },
+        ],
+      },
+      {
+        name: 'Abstract Classes and Methods',
+        tags: ['classes', 'typescript', 'abstract'],
+        description:
+          'Define classes and methods as abstract to create base classes.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Abstract Class Example',
+            description:
+              'Use abstract classes and methods to define a blueprint for subclasses.',
+            code: 'abstract class Shape {\n  abstract area(): number;\n}\nclass Circle extends Shape {\n  constructor(private radius: number) {\n    super();\n  }\n  area(): number {\n    return Math.PI * this.radius * this.radius;\n  }\n}\nconst circle = new Circle(5);\nconsole.log(circle.area());',
+          },
+        ],
+      },
+    ],
   },
   modules: {
     name: 'Modules',
     description: 'Reusable pieces of code in TypeScript.',
     level: 'basic',
     code: '',
-    subTopics: [],
+    subTopics: [
+      {
+        name: 'Exporting and Importing',
+        tags: ['modules', 'typescript', 'export', 'import'],
+        description: 'Learn how to export and import modules in TypeScript.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Export and Import',
+            description:
+              'Export a function from one file and import it in another.',
+            code: '// math.ts\nexport function add(a: number, b: number): number {\n  return a + b;\n}\n\n// main.ts\nimport { add } from "./math";\nconsole.log(add(2, 3)); // Output: 5',
+          },
+        ],
+      },
+      {
+        name: 'Default Exports',
+        tags: ['modules', 'typescript', 'default export'],
+        description:
+          'Understand how to use default exports in TypeScript modules.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Using Default Export',
+            description:
+              'Export a single entity as the default export from a module.',
+            code: '// logger.ts\ndefault export function log(message: string): void {\n  console.log(message);\n}\n\n// app.ts\nimport log from "./logger";\nlog("Hello, world!");',
+          },
+        ],
+      },
+      {
+        name: 'Re-exporting',
+        tags: ['modules', 'typescript', 're-export'],
+        description: 'Learn how to re-export entities from other modules.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Re-exporting from a Module',
+            description: 'Re-export functions or objects from another module.',
+            code: '// utilities.ts\nexport { add } from "./math";\n\n// main.ts\nimport { add } from "./utilities";\nconsole.log(add(2, 3));',
+          },
+        ],
+      },
+      {
+        name: 'Module Resolution',
+        tags: ['modules', 'typescript', 'module resolution'],
+        description: 'Understand how TypeScript resolves module paths.',
+        level: 'expert',
+        examples: [
+          {
+            title: 'Configuring Module Resolution',
+            description:
+              'Set up TypeScript to resolve modules using different strategies.',
+            code: '// tsconfig.json\n{\n  "compilerOptions": {\n    "baseUrl": "./",\n    "paths": {\n      "*": ["node_modules/*", "src/types/*"]\n    }\n  }\n}',
+          },
+        ],
+      },
+    ],
   },
   utilityTypes: {
     name: 'Utility Types',
@@ -781,6 +1081,79 @@ interface User {
 }
 
 const partialUser: Partial<User> = { name: "Alice" }; // id is optional
+              `,
+          },
+        ],
+      },
+      {
+        name: 'Readonly<T>',
+        tags: ['utility', 'generic'],
+        description:
+          'Constructs a type with all properties of T set to readonly.',
+        level: 'basic',
+        examples: [
+          {
+            title: 'Basic Usage',
+            description:
+              'Use `Readonly<T>` to make all properties of an interface readonly.',
+            code: `
+interface User {
+  id: number;
+  name: string;
+}
+
+const readonlyUser: Readonly<User> = { id: 1, name: "Alice" };
+// readonlyUser.id = 2; // Error: Cannot assign to 'id' because it is a read-only property.
+              `,
+          },
+        ],
+      },
+      {
+        name: 'Pick<T, K>',
+        tags: ['utility', 'generic'],
+        description:
+          'Constructs a type by picking a set of properties K from T.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Usage',
+            description:
+              'Use `Pick<T, K>` to select a subset of properties from an interface.',
+            code: `
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+type UserPreview = Pick<User, 'id' | 'name'>;
+const userPreview: UserPreview = { id: 1, name: "Alice" };
+              `,
+          },
+        ],
+      },
+      {
+        name: 'Record<K, T>',
+        tags: ['utility', 'generic'],
+        description: 'Constructs a type with a set of properties K of type T.',
+        level: 'advanced',
+        examples: [
+          {
+            title: 'Basic Usage',
+            description:
+              'Use `Record<K, T>` to create a type with specified keys and types.',
+            code: `
+type PageInfo = {
+  title: string;
+};
+
+type Page = "home" | "about" | "contact";
+
+const pageInfo: Record<Page, PageInfo> = {
+  home: { title: "Home" },
+  about: { title: "About" },
+  contact: { title: "Contact" }
+};
               `,
           },
         ],

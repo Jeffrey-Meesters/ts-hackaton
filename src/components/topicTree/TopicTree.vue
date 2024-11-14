@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useDataStore } from '@/stores/useDataStore';
 
-import { useDataStore } from '@/stores/useDataStore'
 import { type TopicTree } from '@/types/DataModel';
+const { topicTree } = storeToRefs(useDataStore());
 
-const dataStore = useDataStore();
 const router = useRouter();
-const NodeService = dataStore.topicTree;
 const nodes = ref<TopicTree[] | null>(null);
 const expandedKeys = ref<Record<string, boolean>>({});
 
 onMounted(() => {
-  nodes.value = NodeService;
+  nodes.value = topicTree.value;
 });
 
 const expandAll = () => {
@@ -37,9 +37,22 @@ const expandNode = (node: TopicTree) => {
   }
 };
 
+const toCamelCase = (inputString:string) =>  {
+    return inputString
+        .split(' ')
+        .map((word, index) => 
+            index === 0 
+            ? word.toLowerCase() 
+            : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join('');
+}
+
 const onNodeClick = (node: TopicTree) => {
   if (node !== undefined) {
-    router.push({ name: 'topic', params: { topic: node.label } });
+    const topic = toCamelCase(node.label);
+      const subTopic = '0';
+      router.push({ name: 'detail', params: { topic, subTopic } });
   }
 };
 </script>
@@ -54,7 +67,6 @@ const onNodeClick = (node: TopicTree) => {
       v-model:expandedKeys="expandedKeys"
       :value="nodes"
       class="w-full md:w-[30rem] cursor-pointer"
-      @node-click="onNodeClick"
     >
       <template #default="{ node }">
         <span @click="onNodeClick(node)">{{ node.label }}</span>
