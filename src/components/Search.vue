@@ -1,75 +1,85 @@
 <template>
-  <div class="inline-block w-full" ref="searchContainer">
+  <div class="inline-block w-full relative" ref="searchContainer">
     <form class="mx-auto">
-      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+      <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <svg class="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
           </svg>
         </div>
         <input
           v-model="query"
           @input="onInput"
-          @focus="showResults = true"
+          @click="checkResult"
+          @keydown="handleKeydown"
+          ref="inputRef"
           type="search"
-          id="default-search"
-          class="block w-full p-6 px-12 text-xl ps-10 text-gray-900 border border-gray-300 rounded-full bg-slate-100 focus:ring-blue-500 focus:border-blue-500 d"
+          id="search"
+          class="block w-full p-6 px-12 text-xl ps-12 text-gray-900 border border-gray-300 rounded-full bg-slate-100 focus:outline-none"
           placeholder="Search..."
-          required
+          aria-label="Search input"
         />
         <button
           type="submit"
           class="text-white absolute end-5 bottom-5 bg-red-400 rounded-full hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2"
+          aria-label="Submit search"
         >
           Search
         </button>
       </div>
     </form>
-    <div v-if="showResults" class="bg-slate-200 mt-3 shadow-xl rounded-xl overflow-hidden">
-      <span v-if="topics" class="bg-slate-700 text-white block py-2 pl-2">Topics</span>
-      <ul v-if="topics">
-        <li :key="key" v-for="(topic, key) of topics" class="py-1 pl-2" @click="showResults = false">
-          <router-link :to="key">{{ topic?.name }}</router-link>
+    <section
+      class="bg-slate-200 mt-3 p-4 shadow-xl rounded-xl overflow-hidden absolute w-full z-50"
+      v-if="showSearchResult"
+      aria-label="Search results"
+    >
+      <ul>
+        <li :key="key" v-for="(topic, key) of topics" @click="selectTopic" class="hover:text-green-700" ref="resultItems" @keydown.enter="selectTopic">
+          <router-link class="block p-2" :to="`/${key}`">{{ topic?.name }}</router-link>
+        </li>
+        <li :key="index" v-for="(subTopic, index) in subTopics" @click="selectTopic" class="hover:text-green-700" ref="resultItems" @keydown.enter="selectTopic">
+          <router-link class="block p-2" :to="`/${subTopic.parent}/${subTopic.index}`">{{ subTopic?.name }}</router-link>
         </li>
       </ul>
-      <!-- <span v-if="subTopics?.length" class="bg-slate-700 text-white block py-2 pl-2">Subtopics</span>
-      <ul v-if="subTopics">
-        <li :key="key" v-for="(topic, key) of subTopics" class="py-1 pl-2" @click="showResults = false">
-          <router-link :to="topic">{{ topic?.name }}</router-link>
-        </li>
-      </ul> -->
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { docs } from '../data/docs';
 
-import type { PartialTypeScriptDocs, SubTopic, SearchItem, Topic } from '@/types/DataModel';
+import type { PartialTypeScriptDocs, SearchResultItem, SubTopic } from '@/types/DataModel';
 
-type listType = string[];
+const focusedItemIndex = ref<number>(-1);
+const inputRef = ref<HTMLInputElement | null>(null); 
+const resultItems = ref<HTMLElement[]>([]);
 const query = ref<string>('');
-const searchList = ref<listType>([]);
-const showResults = ref<boolean>(false);
+const isFocusOnSearch = ref<boolean>(false);
 const searchContainer = ref<HTMLElement | null>(null);
 const topics = ref<PartialTypeScriptDocs | null>(null);
-type SearchTopic = SubTopic & {index: number, topicKey: string}[]
-const subTopics = ref<SearchTopic>();
+const subTopics = ref<SearchResultItem[]>();
+const emit = defineEmits(['closeModal']);
 
-const fetchSearchResults = () => {
+const showSearchResult = computed<boolean>(() => {
+  return isFocusOnSearch.value && query.value.length > 2 && (JSON.stringify(topics.value).length > 4|| subTopics.value?.length) ? true : false;
+});
+
+const fetchSearchResultsbaseOnSubTopics = (subTopicList: SubTopic[], parent: string) => {
+  if (subTopicList.length) {
+    subTopicList.forEach((item, index) => {
+      if (item.name.toLowerCase().includes(query.value.toLowerCase())) {
+        subTopics.value?.push({...item, index, parent: parent});
+      }
+    });
+  }
+};
+
+
+const fetchSearchResultsbaseOnTopics = () => {
   const result = Object.entries(docs).filter(([key, value]) => {
-    // if (value.subTopics.length) {
-    //   const subtopicList = value.subTopics.filter((item, index) => {
-    //     if (item.name.toLowerCase().includes(query.value.toLowerCase())) {
-    //       subTopics.value?.push({...item, index, topicKey: key});
-    //       return item as SubTopic;
-    //     }
-    //   });
-    //   console.log(subTopics.value);
-      
-    // }
+    fetchSearchResultsbaseOnSubTopics(value.subTopics, key)
     if (value.name.toLowerCase().includes(query.value.toLowerCase())) {
       return [key, value];
     }
@@ -78,18 +88,44 @@ const fetchSearchResults = () => {
 };
 
 const onInput = () => {
-  subTopics.value = [] as any as SearchTopic;
-  showResults.value = query.value.length > 0;
-  fetchSearchResults();
+  if(query.value.length > 2){
+    topics.value= {};
+    subTopics.value = [];
+    isFocusOnSearch.value = query.value.length > 2;
+    fetchSearchResultsbaseOnTopics();
+  }
 };
 
 const handleClickOutside = (event: MouseEvent) => {
   if (searchContainer.value && !searchContainer.value.contains(event.target as Node)) {
-    showResults.value = false;
+    isFocusOnSearch.value = false;
+  }
+};
+
+const selectTopic = () => {
+  query.value = '';
+  isFocusOnSearch.value = false;
+  emit('closeModal');
+};
+
+function checkResult() {
+  isFocusOnSearch.value = true;
+}
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'ArrowDown') {
+    event.preventDefault();
+    focusedItemIndex.value = (focusedItemIndex.value + 1) % resultItems.value.length;
+    resultItems.value[focusedItemIndex.value]?.focus();
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault();
+    focusedItemIndex.value = (focusedItemIndex.value - 1 + resultItems.value.length) % resultItems.value.length;
+    resultItems.value[focusedItemIndex.value]?.focus();
   }
 };
 
 onMounted(() => {
+  inputRef.value?.focus();
   document.addEventListener('click', handleClickOutside);
 });
 

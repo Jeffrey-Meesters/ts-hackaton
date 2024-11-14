@@ -12,7 +12,7 @@
   
   <script setup lang="ts">
   import { ref } from 'vue';
-  import SearchModal from './SearchModal.vue'; // Adjust the path as needed
+  import SearchModal from './SearchModal.vue';
   
   const isModalVisible = ref(false);
   

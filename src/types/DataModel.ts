@@ -17,6 +17,11 @@ export type SearchItem = {
   ]
 }
 
+export type SearchResultItem = {
+  index: number,
+  parent: string
+} & SubTopic
+
 export type Example = {
   title?: string
   description?: string
