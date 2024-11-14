@@ -21,14 +21,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-row">
-    <div  class="bg-blue" v-for="cardDetail in cardDetails" :key="cardDetail.name">
-      <TopicCard
-        :name="cardDetail.name"
-        :code="cardDetail.code"
-        :description="cardDetail.description"
-        :parentName="cardDetail.parentName"
-      />
+  <div class="grid grid-cols-3 px-8 gap-6">
+    <div class="h-full" v-for="cardDetail in cardDetails" :key="cardDetail.name">
+      <TopicCard :name="cardDetail.name" :code="cardDetail.code" :description="cardDetail.description" :parentName="cardDetail.parentName" />
     </div>
   </div>
 </template>
