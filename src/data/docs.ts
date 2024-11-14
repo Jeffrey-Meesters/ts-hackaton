@@ -272,58 +272,6 @@ export const docs: TypeScriptDocs = {
       },
     ],
   },
-  tripeSlashDirectives: {
-    name: 'Triple-Slash Directives',
-    description: 'Special comments for compiler directives.',
-    level: 'basic',
-    code: '/// <reference path="..." />',
-    subTopics: [
-      {
-        name: 'Reference Directives',
-        tags: ['triple-slash', 'typescript', 'reference'],
-        description:
-          'Learn how to use triple-slash reference directives to include files.',
-        level: 'basic',
-        examples: [
-          {
-            title: 'Basic Reference Directive',
-            description:
-              'Use a triple-slash directive to include a reference to another file.',
-            code: '/// <reference path="helper.ts" />\nconsole.log("This file references helper.ts");',
-          },
-        ],
-      },
-      {
-        name: 'Types Reference Directive',
-        tags: ['triple-slash', 'typescript', 'types'],
-        description:
-          'Use types reference directive to include declaration files.',
-        level: 'basic',
-        examples: [
-          {
-            title: 'Including Type Declarations',
-            description:
-              'Include type declarations from DefinitelyTyped packages.',
-            code: '/// <reference types="node" />\nimport * as fs from "fs";\nconsole.log("Node.js types included");',
-          },
-        ],
-      },
-      {
-        name: 'No-Default-Lib Directive',
-        tags: ['triple-slash', 'typescript', 'no-default-lib'],
-        description: 'Exclude the default library files from the compilation.',
-        level: 'advanced',
-        examples: [
-          {
-            title: 'Excluding Default Libraries',
-            description:
-              'Use the no-default-lib directive to exclude default libraries.',
-            code: '/// <reference no-default-lib="true"/>\nconsole.log("Default libraries excluded");',
-          },
-        ],
-      },
-    ],
-  },
   typeCompatibility: {
     name: 'Type Compatibility',
     description: 'Determines if one type is assignable to another.',

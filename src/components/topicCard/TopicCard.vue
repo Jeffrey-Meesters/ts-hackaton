@@ -13,6 +13,10 @@ defineProps<CardProps>();
 
 const router = useRouter();
 
+const onNodeClick = (topic: string, subTopic: string) => {
+  router.push({ name: 'detail', params: { topic, subTopic } });
+};
+
 </script>
 <template>
   <div>
@@ -28,7 +32,7 @@ const router = useRouter();
         </template>
         <template #footer>
           <div class="flex gap-4 mt-1">
-            <Button label="See Detail" class="w-full" @click="router.push({ path: `/${parentName}/${name}` })" />
+            <Button label="See Detail" class="w-full" @click="onNodeClick(parentName, '0')" />
           </div>
         </template>
       </Card>
