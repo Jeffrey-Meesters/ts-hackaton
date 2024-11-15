@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-3 px-8 gap-6">
+  <div class="grid grid-cols-3 px-8 gap-6 my-24 md:max-w-6xl">
     <div class="h-full" v-for="cardDetail in cardDetails" :key="cardDetail.name">
       <TopicCard :name="cardDetail.name" :code="cardDetail.code" :description="cardDetail.description" :parentName="cardDetail.parentName" />
     </div>
