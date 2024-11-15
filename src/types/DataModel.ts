@@ -18,9 +18,16 @@ export type SearchItem = {
 }
 
 export type SearchResultItem = {
-  index: number,
-  parent: string
-} & SubTopic
+  index?: number,
+  parent: string,
+  name: string,
+  path: string,
+}
+
+export type SearchResultItems = {
+  type: "Topics" | "SubTopics",
+  items: SearchResultItem[]
+}[]
 
 export type Example = {
   title?: string
